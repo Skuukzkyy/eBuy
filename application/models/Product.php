@@ -3,12 +3,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Product extends CI_Model {
 
-    function get_all($order_by){
-        return $this->db->query("SELECT * FROM products ORDER BY $order_by DESC")->result_array();
+    function get_all(){
+        return $this->db->query("SELECT * FROM products")->result_array();
+    }
+
+    function get_by_name_or_id($search_keyword){
+        $query = "SELECT * FROM products WHERE id = ? OR name LIKE ?";
+        $values = array($search_keyword, "%$search_keyword%");
+        return $this->db->query($query, $values)->result_array();
     }
 
     function get_by_category($search_keyword, $order_by){
-
         $query = "SELECT * FROM products WHERE name LIKE ?";
         $values = array("%$search_keyword%");
         
