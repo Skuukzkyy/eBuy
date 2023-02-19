@@ -1,22 +1,24 @@
 $(document).ready(function(){
 
-    $(document).on('submit', 'form', function(){
-        $.post($(this).attr('action'), $(this).serialize(), function(res){
-            // console.log(category_id);
+    $(document).on('submit', 'form#search', function(){
+        var filter = $('form#search').serialize() + '&sorted_by=' + $('#sorted_by').val();
+        $.post('/products/load_products',filter, function(res){
+            console.log(res);
             $('section#products').html(res);
         });
-
         return false;
     });
 
-    $(document).on('change', '#sorted_by', function(){
-        $(this).parent().submit();
+    // sort and search
+    $(document).on('change keyup', '#sorted_by, #search_keyword', function(){
+        $('form#search').submit();
     });
 
-    $('form#sort').submit();
+    $('form#search').submit();
 
+    // category
     $(document).on('click', '.category', function(){
-        var filter = $('form#sort').serialize();
+        var filter = $('form#search').serialize() + '&sorted_by=' + $('#sorted_by').val();
         var category_id = $(this).attr('href')
         filter += "&category_id="+category_id;
 
@@ -25,4 +27,5 @@ $(document).ready(function(){
         });
         return false;
     });
+
 });

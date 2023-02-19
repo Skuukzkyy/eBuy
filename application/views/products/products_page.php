@@ -11,10 +11,11 @@
         <script src="/assets/js/products_page.js"></script>
     </head>
     <body>
-        <form action="./search-keyword.html" method="POST">
+        <form action="/products/load_products" method="POST" id="search">
             <div>
-                <img src='./img/magnifying_glass.png' />
-                <input type="search" name="search_keyword" placeholder="search">
+                <img src='/assets/img/magnifying_glass.png' />
+                <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
+                <input type="search" name="search_keyword" id="search_keyword" placeholder="search">
             </div>
             <ul>
                 <strong>Categories</strong>
@@ -37,7 +38,6 @@
                 <a href="#">next</a>
             </nav>
             <form action="/products/load_products" method="POST" id="sort">
-                <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
                 <label for="sorted_by">Sorted by</label>
                 <select name="sorted_by" id="sorted_by">
                     <option value="price" selected>Price</option>

@@ -17,13 +17,15 @@ class Products extends CI_Controller {
 	}
 
 	public function load_products(){
+		// $this->output->enable_profiler(TRUE);
 		$order_by = $this->input->post('sorted_by', TRUE);
 		$category_id = $this->input->post('category_id', TRUE);
-
+		$search_keyword = $this->input->post('search_keyword', TRUE);
+		// var_dump($search_keyword); die();
 		if($category_id != null){
 			$this->session->set_userdata('current_category_id', $category_id);
 		}
-		$data['products'] = $this->Product->get_by_category($category_id, $order_by);
+		$data['products'] = $this->Product->get_by_category($search_keyword, $order_by);
 
 		$this->load->view('/partials/products', $data);
 	}
