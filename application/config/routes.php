@@ -51,6 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'products';
 $route['carts'] = 'users/carts';
+// admin
 $route['dashboard/products'] = 'admins/products_dashboard';
 $route['dashboard/orders'] = 'admins/orders_dashboard';
 $route['orders/show/(:num)'] = 'admins/orders_show/$1';

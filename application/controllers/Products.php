@@ -10,6 +10,10 @@ class Products extends CI_Controller {
 	}
 
 	public function index(){
+		if($this->session->userdata('is_admin')){
+            redirect('/dashboard/products');
+        }
+
 		$data['categories'] = $this->Category->get_all();
 
 		$this->load->view('/partials/header');

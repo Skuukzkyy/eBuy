@@ -12,7 +12,7 @@ class Product extends CI_Model {
         $query = "SELECT * FROM products WHERE name LIKE ?";
         $values = array("%$search_keyword%");
         
-        if($this->session->userdata('current_category_id') != '0'){
+        if($this->session->userdata('current_category_id') != null && $this->session->userdata('current_category_id') != '0'){
             $query .= " AND category_id = ?";
             $values[] = $this->session->userdata('current_category_id');
         }

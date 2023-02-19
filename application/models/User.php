@@ -23,6 +23,9 @@ class User extends CI_Model {
             $password_given = md5($form_data['password'] . $user_salt); 
 
             if($password_given == $user['password']){ 
+                if($user['is_admin']){
+                    $this->session->set_userdata('is_admin', TRUE);
+                }
                 $this->session->set_userdata('user_id', $user['id']);
                 return 'success';
             }
