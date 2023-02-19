@@ -9,6 +9,9 @@ class Users extends CI_Controller {
 	}
 
 	public function login(){
+		if($this->session->userdata('user_id') != null){
+			redirect('/');
+		}
 		$this->load->view('/partials/header');
 		$this->load->view('/users/login_page');
 	}
@@ -25,6 +28,10 @@ class Users extends CI_Controller {
 	}
 
 	public function register(){
+		if($this->session->userdata('user_id') != null){
+			redirect('/');
+		}
+		
 		$this->load->view('/partials/header');
 		$this->load->view('/users/registration_page');
 	}
