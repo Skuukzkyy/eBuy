@@ -10,21 +10,21 @@ class Products extends CI_Controller {
 	}
 
 	public function index(){
-		redirect('/products/category/0/1');
-	}
-
-	public function category($category_id, $current_page){
 		$data['categories'] = $this->Category->get_all();
-		$data['current_category'] = $category_id;
-		// $data['products'] = $this->Product->get_by_category($category_id);
+
 		$this->load->view('/partials/header');
 		$this->load->view('/products/products_page', $data);
 	}
 
 	public function load_products(){
-		$current_category = $this->input->post('current_category', TRUE);
-		$sort_by = $this->input->post('sorted_by', TRUE);
-		$data['products'] = $this->Product->get_by_category($current_category, $sort_by);
+		$order_by = $this->input->post('sorted_by', TRUE);
+		$category_id = $this->input->post('category_id', TRUE);
+
+		if($category_id != null){
+			$this->session->set_userdata('current_category_id', $category_id);
+		}
+		$data['products'] = $this->Product->get_by_category($category_id, $order_by);
+
 		$this->load->view('/partials/products', $data);
 	}
 

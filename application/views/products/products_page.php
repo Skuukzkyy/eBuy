@@ -21,11 +21,11 @@
 <?php
     foreach($categories as $category){
 ?>
-                <li><a href="/products/category/<?= $category['id'] ?>/1"><?= $category['name'] ?> (<?= $category['product_count'] ?>)</a></li>
+                <li><a href="<?= $category['id'] ?>" class="category"><?= $category['name'] ?> (<?= $category['product_count'] ?>)</a></li>
 <?php
     }
 ?>
-                <li><a href="/products/category/0/1">Show All</a></li>
+                <li><a href="0" class="category">Show All</a></li>
             </ul>
         </form>
         <main>
@@ -38,7 +38,6 @@
             </nav>
             <form action="/products/load_products" method="POST" id="sort">
                 <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
-                <input type="hidden" name="current_category" value="<?= $current_category ?>">
                 <label for="sorted_by">Sorted by</label>
                 <select name="sorted_by" id="sorted_by">
                     <option value="price" selected>Price</option>
@@ -46,7 +45,9 @@
                 </select>
             </form>
             <!-- Display Products -->
-            <section id="products"></section>
+            <section id="products">
+            </section>
+            <footer>
                 <a href="#">1</a>
                 <a href="#">2</a>
                 <a href="#">3</a>

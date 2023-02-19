@@ -8,10 +8,14 @@ class Product extends CI_Model {
     }
 
     function get_by_category($category_id, $order_by){
-        if($category_id == 0){
+
+        if($this->session->userdata('current_category_id') == '0'){
             return $this->get_all($order_by);
         }
-        return $this->db->query("SELECT * FROM products WHERE category_id = ? ORDER BY $order_by DESC", array($category_id))->result_array();
+
+        $query = "SELECT * FROM products WHERE category_id = ? ORDER BY $order_by DESC";
+        $values = array($this->session->userdata('current_category_id'));
+        return $this->db->query($query, $values)->result_array();
     }
 
 }
