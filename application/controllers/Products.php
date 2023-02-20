@@ -25,7 +25,6 @@ class Products extends CI_Controller {
 		$order_by = $this->input->post('sorted_by', TRUE);
 		$category_id = $this->input->post('category_id', TRUE);
 		$search_keyword = $this->input->post('search_keyword', TRUE);
-		// var_dump($search_keyword); die();
 		if($category_id != null){
 			$this->session->set_userdata('current_category_id', $category_id);
 		}
@@ -54,10 +53,10 @@ class Products extends CI_Controller {
 				INSERT INTO products(category_id, name, description, price, inventory_count, images)
 				VALUES (?,?,?,?,?,?);
 			";
-		$values = array(1, 'White Tshirt', 'Kulay Puti', 80, 500, json_encode($images));
-		$this->db->query($query, $values);
+		$values = array(5, 'White Dress', 'Kulay Puti', 800, 96, json_encode($images));
+		// $this->db->query($query, $values);
 
-		$product = $this->db->query("SELECT * FROM products where id = 5")->row_array();
+		$product = $this->db->query("SELECT * FROM products where id = 13")->row_array();
 		$product_images = json_decode($product['images']);
 		var_dump($product_images->others);
 		// echo "<pre>";
