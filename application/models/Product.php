@@ -32,6 +32,8 @@ class Product extends CI_Model {
     }
 
     function create($form_data){
+
+
         $query = "INSERT INTO products(category_id, name, description, price, inventory_count, images)
                 VALUES(?,?,?,?,?,?)
         ";

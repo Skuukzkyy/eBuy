@@ -19,7 +19,6 @@ $(document).ready(function() {
             }, 200);
     }
     // for ajax loding products
-    // <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
     $('#search_keyword').keyup(function(){
         $('#page_number').val(1);
         $(this).parent().submit();
@@ -51,9 +50,35 @@ $(document).ready(function() {
     });
 
     //edit category
-    $(document).on('click', "img.edit", function() {
+    $(document).on('click', "form#add_new_product img.edit", function() {
+        $('input.category').attr('readonly',true);
         $(this).siblings("input").removeAttr("readonly");
         $(this).siblings("input").focus();
+    });
+
+    // delete category
+    $(document).on('click', 'form#add_new_product img.remove', function(){
+        var data = {'category': 'testcat', 'category_id': 'idididi'}
+        $.get("/admins/test", data,
+            function (res) {
+                console.log(res);
+            },
+        );
+
+    });
+
+    $(document).on('keyup', 'form#add_new_product input.category', function(){
+        // var form_value = $(this).val();
+        // var data = $('form#csrf').serialize() + '&category=' + form_value + '&category_id=' + $(this).attr('data-category-id');
+        var data = {'category': $(this).val(), 'category_id': $(this).attr('data-category-id')}
+        $.get('/admins/update_category', data, function(res){
+            $('summary.add_category').html(form_value + '<span>▼</span>');
+            show_hide_loader();
+        });
+    });
+
+    $(document).on('blur', 'input.category', function(){
+        $(this).attr('readonly',true);
     });
     //update/add category
     $(document).on('click', "form#add_new_product input.category", function() {
@@ -67,9 +92,11 @@ $(document).ready(function() {
                 $('form#add_new_product #category').attr('readonly',false);
                 $('form#add_new_product #category').val('');
             }
-            // show_hide_loader();
-            // $("input.category").attr("readonly", "true");
     });
+
+
+
+
 
 
     $(document).on("click", "button#edit", function() {
@@ -90,9 +117,9 @@ $(document).ready(function() {
         window.open('product_details.html', '_blank');
     });
     //Product or Category delete
-    $(document).on('click', "button#delete, img.remove", function() {
-        if (confirm($(this).attr('title') + " will be deleted. Click to confirm.")) {
-            alert($(this).attr('title')+" is now deleted.");
-        }
-    });
+    // $(document).on('click', "button#delete, img.remove", function() {
+    //     if (confirm($(this).attr('title') + " will be deleted. Click to confirm.")) {
+    //         alert($(this).attr('title')+" is now deleted.");
+    //     }
+    // });
 });

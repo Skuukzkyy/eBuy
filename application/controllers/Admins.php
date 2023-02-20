@@ -33,12 +33,22 @@ class Admins extends CI_Controller {
         echo json_encode($response);
     }
 
+    public function update_category(){
+        $form_data = $this->input->post(NULL, TRUE);
+        $this->Category->update($form_data);
+    }
+
     public function create(){
         $form_data = $this->input->post(NULL, TRUE);
         $result = $this->Product->validate_create();
         if($result == 'success'){
-            $uploaded_images = $_FILES['images'];
+
+            $is_existing_category = $this->Category->get_by_id($form_data['category']);
+            if(!$is_existing_category){
+                $form_data['category'] = $this->Category->create($form_data['category']);
+            }
             // validate uploaded image extensions
+            $uploaded_images = $_FILES['images'];
             $result = $this->is_valid_image($uploaded_images);
             if($result === TRUE){
                 // get the max id in the product table so that I know the id of this product will be and create directory for it
@@ -99,4 +109,10 @@ class Admins extends CI_Controller {
         }
         return TRUE;
     }
+
+    // public function test(){
+    //     echo "<pre>";
+    //     echo $this->input->get('category_id');
+    //     echo "</pre>";
+    // }
 }
