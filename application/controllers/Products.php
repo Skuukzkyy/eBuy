@@ -14,7 +14,7 @@ class Products extends CI_Controller {
             redirect('/dashboard/products');
         }
 
-		$data['categories'] = $this->Category->get_all();
+		$data['categories'] = $this->Category->get_category_with_product();
 
 		$this->load->view('/partials/header');
 		$this->load->view('/products/products_page', $data);

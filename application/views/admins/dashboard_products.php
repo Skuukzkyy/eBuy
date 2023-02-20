@@ -14,6 +14,9 @@
         <link rel="stylesheet" href="/assets/css/header.css"/>
     </head>
     <body> 
+
+        <div class="error"><?= $this->session->flashdata('error_message') ?></div>
+
         <!-- edit -->
         <div class="form-dialog" id="form-edit-dialog">
             <div class="loader-dialog">
@@ -87,9 +90,10 @@
 <!-- add -->
         <div class="form-dialog" id="form-add-dialog">
             <div class="loader-dialog">
-                <img src="img/ajax-loader.gif"/>
+                <img src="/assets/img/ajax-loader.gif"/>
             </div>
-            <form action="#" method="POST">
+            <form action="/admins/create" method="POST" id="add_new_product" enctype="multipart/form-data">
+                <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
                 <label for="name">Name:</label>
                 <input type="text" name="name"/>
         
@@ -98,32 +102,40 @@
                 
                 <label for="categories">Categories:</label>
                 <details>
-                    <summary>Tools<span>▼</span></summary>
+                    <summary class="add_category">Select Category:<span>▼</span></summary>
                     <div>
+                        <!-- for emptty category selection -->
                         <section>
-                            <input class="category" type="text" value="Hardware" readonly/>
-                            <img class="edit" src="img/pencil.png"/>
-                            <img class="remove" title="Hardware" src="img/trash-can.png"/>
+                            <input class="category" type="text" value="" readonly/>
                         </section>
+<?php
+    foreach($categories as $category){
+?>
                         <section>
-                            <input class="category" type="text" value="Tactical" readonly/>
-                            <img class="edit" src="img/pencil.png"/>
-                            <img class="remove" title="Tactical" src="img/trash-can.png"/>
+                            <input class="category" type="text" value="<?= $category['name'] ?>" data-category-id="<?= $category['id'] ?>" readonly/>
+                            <img class="edit" src="/assets/img/pencil.png"/>
+                            <img class="remove" title="Hardware" src="/assets/img/trash-can.png"/>
                         </section>
+<?php
+    }
+?>
                     </div>
                 </details>
-        
                 <label for="new_category">or add new category:</label>
-                <input type="text" name="new_category"/>
+                <input type="text" name="category" id="category"/>
         
+                <label>Price:</label><input type="number" name="price">
+                <label>Stock:</label><input type="number" name="stock">
+
+                <!-- upload image for new product -->
                 <p>Images:</p>
-                <label for="upload">Upload</label>        
-                <input type="file" id="upload" hidden/>
+                <label for="add_product_images">Upload</label>        
+                <input type="file" name="images[]" id="add_product_images" multiple="multiple" />
                 <ul></ul>
 
                 <button type="button" id="cancel">Cancel</button>
                 <button type="button" id="preview">Preview</button>
-                <input type="submit" value="Update"/>
+                <input type="submit" value="Add"/>
             </form>
         </div>
         <h1>Product dashboard</h1>

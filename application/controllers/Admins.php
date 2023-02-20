@@ -18,7 +18,7 @@ class Admins extends CI_Controller {
         if(!$this->session->userdata('is_admin')){
             redirect('/users/login');
         }
-        $data['products'] = $this->Product->get_all();
+        $data['categories'] = $this->Category->get_all();
 
         $this->load->view('/partials/header');
         $this->load->view('/admins/dashboard_products', $data);
@@ -33,9 +33,45 @@ class Admins extends CI_Controller {
         echo json_encode($response);
     }
 
-    public function change_page(){
-        echo $tthis->input->post(NULL, TRUE);
-        // $this->session->set_flashdata('page_number', );
+    public function create(){
+        $form_data = $this->input->post(NULL, TRUE);
+        $result = $this->Product->validate_create();
+        if($result == 'success'){
+            $uploaded_images = $_FILES['images'];
+            // validate uploaded image extensions
+            $result = $this->is_valid_image($uploaded_images);
+            if($result === TRUE){
+                // get the max id in the product table so that I know the id of this product will be and create directory for it
+                $product_id = $this->Product->get_max_id()['max_id'] + 1;
+                $upload_path = "D:/village88/Capstone/ebuy/assets/img/products/$product_id";
+                // create directory if not exist
+                if (!is_dir($upload_path)) {
+                    mkdir($upload_path, 7777, TRUE);
+                }
+                // loop through sa lahat ng laman to move image to the product folder
+                for ($i = 0; $i < count($uploaded_images['name']); $i++) { 
+                    $image_name = $uploaded_images['name'][$i];
+                    $image_tmp = $uploaded_images['tmp_name'][$i];
+                    $image_extension = pathinfo($image_name, PATHINFO_EXTENSION);
+                    move_uploaded_file($image_tmp, "$upload_path/$image_name");
+                }
+                $image_names = $uploaded_images['name'];
+                $image_json = array(
+                    'main' => array_shift($image_names),
+                    'others' => $image_names //array shift removes the first element in the array (which is the main image)
+                );
+                $image_json =  json_encode($image_json);
+                $form_data['images'] = $image_json;
+                // add to database
+                $this->Product->create($form_data);
+            }else{
+                $this->session->set_flashdata('error_message', $result);
+                redirect('/dashboard/products');
+            }
+        }else{
+            $this->session->set_flashdata('error_message', $result);
+            redirect('/dashboard/products');
+        }
     }
 
     public function orders_dashboard(){
@@ -47,5 +83,20 @@ class Admins extends CI_Controller {
         $this->load->view('/partials/header');
         $this->load->view('/admins/order_details');
     }
-    
+
+    public function is_valid_image($uploaded_images){
+        // Check uploaded images count (limit 4)
+        if(count($uploaded_images['name']) > 4){
+            return "You can only add 4 images";
+        }
+
+        $image_types = $uploaded_images['type'];
+        $valid_types = array('image/png', 'image/jpeg', 'image/jpg');
+        foreach ($image_types as $image_type){
+            if(!in_array($image_type, $valid_types)){
+                return "Unsupported file type $image_type";
+            }
+        }
+        return TRUE;
+    }
 }
