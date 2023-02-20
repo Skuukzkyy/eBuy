@@ -3,6 +3,7 @@ $(document).ready(function() {
     // for ajax loding products
     // <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
     $('#search_keyword').keyup(function(){
+        $('#page_number').val(1);
         $(this).parent().submit();
     });
 
@@ -19,16 +20,20 @@ $(document).ready(function() {
 
     // pagination
     $(document).on('click', 'footer a', function(){
-        var filter = $('form#search').serialize();
-        filter += '&page_number=' + $(this).attr('href');
-        $.post('/admins/load_products', filter, function(res){
+        $('#page_number').val($(this).attr('href'));
+        $('form#search').submit();
+        // var filter = $('form#search').serialize();
+        // filter += '&page_number=' + $(this).attr('href');
+        // $.post('/admins/load_products', filter, function(res){
 
-            var response = JSON.parse(res);
-            $('tbody').html(response.products);
-            $('footer').html(response.pages);
-        });
+        //     var response = JSON.parse(res);
+        //     $('tbody').html(response.products);
+        //     $('footer').html(response.pages);
+        // });
         return false;
     });
+
+
 
 
     $( "#sortable" ).sortable();

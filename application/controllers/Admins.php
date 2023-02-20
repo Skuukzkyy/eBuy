@@ -25,7 +25,7 @@ class Admins extends CI_Controller {
     }
 
     public function load_products(){
-        $data['page_number'] = ($this->input->post('page_number', TRUE) ? $this->input->post('page_number', TRUE) : 1);
+        $data['page_number'] = $this->input->post('page_number', TRUE);
         $search_keyword = $this->input->post('search_keyword', TRUE);
         $data['products'] = $this->Product->get_by_name_or_id($search_keyword);
         $response['products'] = $this->load->view('/partials/admins/dashboard_products', $data, TRUE);

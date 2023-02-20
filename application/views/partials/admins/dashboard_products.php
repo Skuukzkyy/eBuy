@@ -1,6 +1,6 @@
 <?php
     for ($i = ($page_number - 1) * 10; $i < $page_number * 10; $i++) { 
-        if($i == count($products)){
+        if($i >= count($products)){
             break;
         }
         $images = json_decode($products[$i]['images']);

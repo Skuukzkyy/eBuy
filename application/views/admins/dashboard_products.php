@@ -132,6 +132,7 @@
                 <form action="/admins/load_products" method="POST" id="search">
                     <img src='./img/magnifying_glass.png' />
                     <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
+                    <input type="hidden" name="page_number" id="page_number" value = 1>
                     <input type="search" name="search_keyword" id="search_keyword" placeholder="search">
                 </form>
             </div>
