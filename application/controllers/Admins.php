@@ -28,20 +28,62 @@ class Admins extends CI_Controller {
         $data['page_number'] = $this->input->post('page_number', TRUE);
         $search_keyword = $this->input->post('search_keyword', TRUE);
         $data['products'] = $this->Product->get_by_name_or_id($search_keyword);
-        $response['products'] = $this->load->view('/partials/admins/dashboard_products', $data, TRUE);
-        $response['pages'] = $this->load->view('/partials/admins/dashboard_products_footer', $data, TRUE);
+        $response['products'] = $this->load->view('/partials/admins/products', $data, TRUE);
+        $response['pages'] = $this->load->view('/partials/admins/products_footer', $data, TRUE);
+        $response['categories'] = $this->load->view('/partials/admins/categories', $data, TRUE);
+        echo json_encode($response);
+    }
+
+    public function load_product_details($product_id){
+        $data['categories'] = $this->Category->get_all();
+        $data['product_details'] = $this->Product->get_by_id($product_id);
+        $response['product_details'] = $this->load->view('/partials/admins/product_details', $data, TRUE);
         $response['categories'] = $this->load->view('/partials/admins/categories', $data, TRUE);
         echo json_encode($response);
     }
 
     public function update_category(){
-        $form_data = $this->input->post(NULL, TRUE);
+        $form_data = $this->input->get(NULL, TRUE);
         $this->Category->update($form_data);
+    }
+
+    public function update_product(){
+        $form_data = $this->input->post();
+        $result = $this->Product->validate();
+        if($result === 'success'){
+            var_dump($form_data);
+            $images = array('main' => $form_data['main']);
+            var_dump($images);
+        }else{
+            $this->session->set_flashdata('error_message', $result);
+            redirect('/dashboard/products');
+        }
+    }
+
+    public function update_product_image($product_id){
+        $uploaded_images = $_FILES['images'];
+        // var_dump($uploaded_images);die();
+        $result = $this->is_valid_image($uploaded_images);
+        // echo $result;
+        if($result === TRUE){
+            $upload_path = "D:/village88/Capstone/ebuy/assets/img/products/$product_id";
+            for ($i = 0; $i < count($uploaded_images['name']); $i++) { 
+                $image_name = $uploaded_images['name'][$i];
+                $image_tmp = $uploaded_images['tmp_name'][$i];
+                $image_extension = pathinfo($image_name, PATHINFO_EXTENSION);
+                move_uploaded_file($image_tmp, "$upload_path/$image_name");
+            }
+            $image_names = $uploaded_images['name'];
+            $image_names = array('names' => $image_names);
+            echo json_encode($image_names);
+        }else{
+            // pag sobra sa 4 or invalid file type
+        }
     }
 
     public function create(){
         $form_data = $this->input->post(NULL, TRUE);
-        $result = $this->Product->validate_create();
+        $result = $this->Product->validate();
         if($result == 'success'){
 
             $is_existing_category = $this->Category->get_by_id($form_data['category']);

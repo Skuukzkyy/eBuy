@@ -200,6 +200,10 @@ div.form-dialog form {
         div.form-dialog form ul li p {
             display: inline-block;
             vertical-align: bottom;
+            height: 20px;
+            text-overflow: ellipsis; 
+            overflow: hidden; 
+            white-space: nowrap;
             width: 80px;
             text-align:left;
         }

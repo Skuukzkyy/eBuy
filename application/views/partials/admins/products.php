@@ -12,7 +12,7 @@
                     <td><?= $products[$i]['inventory_count'] ?></td>
                     <td><?= $products[$i]['quantity_sold'] ?></td>
                     <td> 
-                        <button id="edit">edit</button>
+                        <button id="edit" data-product-id="<?= $products[$i]['id'] ?>">edit</button>
                         <button id="delete" title="<?= $products[$i]['name'] ?>" action="/admins/delete_product/<?= $products[$i]['id'] ?>">delete</a>
                     </td>
                 </tr>

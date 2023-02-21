@@ -13,6 +13,16 @@ class Product extends CI_Model {
         return $this->db->query($query, $values)->result_array();
     }
 
+    function get_by_id($product_id){
+        $query = "SELECT products.*, product_categories.name AS category  FROM products 
+                INNER JOIN product_categories
+                ON product_categories.id = products.category_id
+                WHERE products.id = ?
+        ";
+        $values = array($product_id);
+        return $this->db->query($query, $values)->row_array();
+    }
+
     function get_max_id(){
         return $this->db->query("SELECT MAX(id) as max_id FROM products")->row_array();
     }
@@ -43,7 +53,7 @@ class Product extends CI_Model {
         $this->db->query("DELETE FROM products WHERE id = ?", $product_id);
     }
 
-    function validate_create(){
+    function validate(){
         $config = array(
             array(
                 'field' => 'name',
