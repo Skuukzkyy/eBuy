@@ -23,20 +23,20 @@
 <?php
     foreach($categories as $category){
 ?>
-                <li><a href="<?= $category['id'] ?>" class="category"><?= $category['name'] ?> (<?= $category['product_count'] ?>)</a></li>
+                <li><a href="<?= $category['id'] ?>" class="category" data-category-name="<?= $category['name'] ?>"><?= $category['name'] ?> (<?= $category['product_count'] ?>)</a></li>
 <?php
     }
 ?>
-                <li><a href="0" class="category">Show All</a></li>
+                <li><a href="0" class="category" data-category-name="All Products">Show All</a></li>
             </ul>
         </form>
         <main>
-            <h2>All Products (page 2)</h2>
+            <h2 class="title">All Product <span>(page 1)</span></h2>
             <nav>
-                <a href="#">first</a>
-                <a href="#">prev</a>
-                <span>2</span>
-                <a href="#">next</a>
+                <a href="*0+1">first</a>
+                <a href="-1">prev</a>
+                <span>1</span>
+                <a href="+1">next</a>
             </nav>
             <form action="/products/load_products" method="POST" id="sort">
                 <label for="sorted_by">Sorted by</label>
