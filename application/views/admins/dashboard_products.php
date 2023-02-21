@@ -104,22 +104,7 @@
                 <label for="categories">Categories:</label>
                 <details>
                     <summary class="add_category">Select Category:<span>▼</span></summary>
-                    <div>
-                        <!-- for emptty category selection -->
-                        <section>
-                            <input class="category" type="text" value="" readonly/>
-                        </section>
-<?php
-    foreach($categories as $category){
-?>
-                        <section>
-                            <input class="category" type="text" value="<?= $category['name'] ?>" data-category-id="<?= $category['id'] ?>" readonly/>
-                            <img class="edit" src="/assets/img/pencil.png"/>
-                            <img class="remove" title="Hardware" src="/assets/img/trash-can.png"/>
-                        </section>
-<?php
-    }
-?>
+                    <div class="categories_container">
                     </div>
                 </details>
                 <label for="new_category">or add new category:</label>

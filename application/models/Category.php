@@ -35,6 +35,10 @@ class Category extends CI_Model {
         return $new_category_id;
     }
 
+    function delete($category_id){
+        $this->db->query("DELETE FROM product_categories WHERE id = ?", array($category_id));
+    }
+
     // function validate($form_data){
     //     if($form_data['category'] == ''){
     //         return 'Category Name cannot be empty';

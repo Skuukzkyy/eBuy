@@ -18,18 +18,19 @@ class Admins extends CI_Controller {
         if(!$this->session->userdata('is_admin')){
             redirect('/users/login');
         }
-        $data['categories'] = $this->Category->get_all();
 
         $this->load->view('/partials/header');
-        $this->load->view('/admins/dashboard_products', $data);
+        $this->load->view('/admins/dashboard_products');
     }
 
     public function load_products(){
+        $data['categories'] = $this->Category->get_all();
         $data['page_number'] = $this->input->post('page_number', TRUE);
         $search_keyword = $this->input->post('search_keyword', TRUE);
         $data['products'] = $this->Product->get_by_name_or_id($search_keyword);
         $response['products'] = $this->load->view('/partials/admins/dashboard_products', $data, TRUE);
         $response['pages'] = $this->load->view('/partials/admins/dashboard_products_footer', $data, TRUE);
+        $response['categories'] = $this->load->view('/partials/admins/categories', $data, TRUE);
         echo json_encode($response);
     }
 
@@ -84,6 +85,15 @@ class Admins extends CI_Controller {
             $this->session->set_flashdata('error_message', $result);
             redirect('/dashboard/products');
         }
+    }
+
+    public function delete_product($product_id){
+        $this->Product->delete($product_id);
+    }
+
+    public function delete_category($category_id){
+        $this->Category->delete($category_id);
+        echo $category_id;
     }
 
     public function orders_dashboard(){
