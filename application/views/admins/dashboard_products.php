@@ -166,8 +166,5 @@
         </table>
         <footer>
         </footer>
-        <form id="csrf">
-        <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
-        </form>
     </body>
 </html>

@@ -68,8 +68,6 @@ $(document).ready(function() {
     });
 
     $(document).on('keyup', 'form#add_new_product input.category', function(){
-        // var form_value = $(this).val();
-        // var data = $('form#csrf').serialize() + '&category=' + form_value + '&category_id=' + $(this).attr('data-category-id');
         var data = {'category': $(this).val(), 'category_id': $(this).attr('data-category-id')}
         $.get('/admins/update_category', data, function(res){
             $('summary.add_category').html(form_value + '<span>▼</span>');

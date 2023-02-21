@@ -28,9 +28,10 @@ class Products extends CI_Controller {
 		if($category_id != null){
 			$this->session->set_userdata('current_category_id', $category_id);
 		}
+		$data['page_number'] = $this->input->post('page_number', TRUE);
 		$data['products'] = $this->Product->get_by_category($search_keyword, $order_by);
 
-		$this->load->view('/partials/products', $data);
+        $this->load->view('/partials/products_page/products', $data);
 	}
 
     public function show($product_id){

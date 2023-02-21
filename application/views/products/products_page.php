@@ -15,6 +15,7 @@
             <div>
                 <img src='/assets/img/magnifying_glass.png' />
                 <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
+                <input type="hidden" name="page_number" value="1">
                 <input type="search" name="search_keyword" id="search_keyword" placeholder="search">
             </div>
             <ul>
@@ -47,14 +48,6 @@
             <!-- Display Products -->
             <section id="products">
             </section>
-            <footer>
-                <a href="#">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#">&#8594;</a>
-            </footer>
         </main>
     </body>
 </html>
