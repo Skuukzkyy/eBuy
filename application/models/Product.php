@@ -32,13 +32,15 @@ class Product extends CI_Model {
     }
 
     function create($form_data){
-
-
         $query = "INSERT INTO products(category_id, name, description, price, inventory_count, images)
                 VALUES(?,?,?,?,?,?)
         ";
         $values = array($form_data['category'], $form_data['name'], $form_data['description'], $form_data['price'], $form_data['stock'], $form_data['images']);
         $this->db->query($query, $values);
+    }
+
+    function delete($product_id){
+        $this->db->query("DELETE FROM products WHERE id = ?", $product_id);
     }
 
     function validate_create(){

@@ -30,10 +30,11 @@ $(document).ready(function() {
             var response = JSON.parse(res);
             $('tbody').html(response.products);
             $('footer').html(response.pages);
+            $('.categories_container').html(response.categories);
         });
         return false;
     });
-    $('form#search').submit();
+    $('form#search').submit(); //submit form pagkaload ng page para mag load lahat ng image
 
     // pagination
     $(document).on('click', 'footer a', function(){
@@ -42,29 +43,20 @@ $(document).ready(function() {
         return false;
     });
 
-
-
     //form showing modal on click
     $("nav button").on("click", function() {
             $("#form-add-dialog").dialog("open");
     });
 
-    //edit category
+    //edittable ng category
     $(document).on('click', "form#add_new_product img.edit", function() {
         $('input.category').attr('readonly',true);
         $(this).siblings("input").removeAttr("readonly");
         $(this).siblings("input").focus();
     });
 
-    // delete category
-    $(document).on('click', 'form#add_new_product img.remove', function(){
-        var data = {'category': 'testcat', 'category_id': 'idididi'}
-        $.get("/admins/test", data,
-            function (res) {
-                console.log(res);
-            },
-        );
-
+    $(document).on('blur', 'input.category', function(){
+        $(this).attr('readonly',true);
     });
 
     //update category
@@ -76,9 +68,17 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on('blur', 'input.category', function(){
-        $(this).attr('readonly',true);
+    // delete category
+    $(document).on('click', "form#add_new_product img.remove", function() {
+        var category_id = $(this).siblings('input.category').attr('data-category-id');
+        $.get('/admins/delete_category/'+category_id, function(res){
+            $('form#search').submit();
+        })
+        .fail(function(error){
+            $('div.error').text('Cannot delete category that basta may benta pa sa category na ito');
+        });
     });
+
     //pindutan ng update/add category
     $(document).on('click', "form#add_new_product input.category", function() {
             $('summary.add_category').html($(this).val() + '<span>▼</span>');
@@ -93,9 +93,16 @@ $(document).ready(function() {
             }
     });
 
+    // delete product
+    $(document).on('click', 'button#delete', function(){
+        if (confirm($(this).attr('title') + " will be deleted. Click to confirm.")) {
+            $.get($(this).attr('action'), function(res){
+                $('form#search').submit();
+            });
 
-
-
+            alert($(this).attr('title')+" is now deleted.");
+        }
+    });
 
 
     $(document).on("click", "button#edit", function() {
@@ -115,6 +122,7 @@ $(document).ready(function() {
     $(document).on('click', "button#preview", function() {
         window.open('product_details.html', '_blank');
     });
+
     //Product or Category delete
     // $(document).on('click', "button#delete, img.remove", function() {
     //     if (confirm($(this).attr('title') + " will be deleted. Click to confirm.")) {
