@@ -5,4 +5,4 @@
 <?php
     }
 ?>
-        <a href="#">&#8594;</a>
+        <a class="page" href="<?= ($page_number > count($products) / 10) ? 1 : $page_number + 1 ?>">&#8594;</a>
