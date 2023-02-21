@@ -19,6 +19,7 @@ $(document).ready(function(){
 
     //pagination
     $(document).on('click', 'footer a.page', function(){
+        $('main nav span').text($(this).attr('href'));
         $('main h2.title span').text('(page ' +$(this).attr('href')+ ')')
         $('form#search input[name=page_number]').val($(this).attr('href'));
         $('form#search').submit();

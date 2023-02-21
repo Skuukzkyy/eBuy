@@ -74,6 +74,8 @@ class Admins extends CI_Controller {
                 $form_data['images'] = $image_json;
                 // add to database
                 $this->Product->create($form_data);
+                $this->session->set_flashdata('success_message', "Added new product successfully");
+                redirect('/dashboard/products');
             }else{
                 $this->session->set_flashdata('error_message', $result);
                 redirect('/dashboard/products');

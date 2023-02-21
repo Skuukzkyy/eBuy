@@ -67,6 +67,7 @@ $(document).ready(function() {
 
     });
 
+    //update category
     $(document).on('keyup', 'form#add_new_product input.category', function(){
         var data = {'category': $(this).val(), 'category_id': $(this).attr('data-category-id')}
         $.get('/admins/update_category', data, function(res){
@@ -78,7 +79,7 @@ $(document).ready(function() {
     $(document).on('blur', 'input.category', function(){
         $(this).attr('readonly',true);
     });
-    //update/add category
+    //pindutan ng update/add category
     $(document).on('click', "form#add_new_product input.category", function() {
             $('summary.add_category').html($(this).val() + '<span>▼</span>');
             // $('summary.add_category').trigger('click');
