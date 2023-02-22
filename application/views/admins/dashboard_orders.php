@@ -7,18 +7,20 @@
         <meta name="author" content="Karen Marie E. Igcasan">
         <link rel="stylesheet" href="/assets/css/header.css"/>
         <link rel="stylesheet" href="/assets/css/dashboard-orders-style.css"/>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="/assets/js/admins/dashboard_orders.js"></script>
     </head>
     <body>
         <nav>
             <div>
-                <img src='./img/magnifying_glass.png' />
-                <input type="search" name="search_keyword" placeholder="search">
+                <img src='/assets/img/magnifying_glass.png' />
+                <input type="search" name="search_keyword" id="search_keyword" placeholder="search">
             </div>
-            <select name="status">
-                <option selected disabled hidden>Show All</option>
-                <option value="order_in_process">Order in process</option>
-                <option value="shipped">Shipped</option>
-                <option value="cancelled">Cancelled</option>
+            <select id="filter" name="filter">
+                <option value="*" selected>Show All</option>
+                <option value="1">Order in process</option>
+                <option value="2">Shipped</option>
+                <option value="0">Cancelled</option>
             </select>
         </nav>
         <table>
@@ -33,34 +35,7 @@
                 </tr>                
             </thead>
             <tbody>
-                <tr>
-                    <td><a href="./order_details.html">101</a></td>
-                    <td>Marlon</td>
-                    <td>9/12/2020</td>
-                    <td>456 Steve Street, Marikina City</td>
-                    <td>$10.00</td>
-                    <td>
-                        <select name="status">
-                            <option value="order_in_process">Order in process</option>
-                            <option value="shipped">Shipped</option>
-                            <option value="cancelled" selected>Cancelled</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><a href="./order_details.html">100</a></td>
-                    <td>Karen</td>
-                    <td>8/27/2020</td>
-                    <td>123 Commmonwealth, Quezon City</td>
-                    <td>$15.00</td>
-                    <td>
-                        <select name="status">
-                            <option value="order_in_process">Order in process</option>
-                            <option value="shipped" selected>Shipped</option>
-                            <option value="cancelled">Cancelled</option>
-                        </select>
-                    </td>
-                </tr>
+
             </tbody>
         </table>
         <footer>

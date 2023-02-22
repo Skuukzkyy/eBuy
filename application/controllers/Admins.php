@@ -7,6 +7,7 @@ class Admins extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Product');
 		$this->load->model('Category');
+		$this->load->model('Order');
 	}
 
     public function index(){
@@ -180,13 +181,29 @@ class Admins extends CI_Controller {
     }
 
     public function orders_dashboard(){
+        $data['orders'] = $this->Order->get_all();
         $this->load->view('/partials/header');
-        $this->load->view('/admins/dashboard_orders');
+        $this->load->view('/admins/dashboard_orders', $data);
     }
 
     public function orders_show($order_id){
         $this->load->view('/partials/header');
         $this->load->view('/admins/order_details');
+    }
+
+    public function update_order_status(){
+        $status = $this->input->get('status', TRUE);
+        $order_id = $this->input->get('order_id', TRUE);
+        $this->Order->update_order_status($order_id, $status);
+    }
+
+    public function filter_order(){
+        // $this->output->enable_profiler(TRUE);
+        $status = $this->input->get('status', TRUE);
+        $search_keyword = $this->input->get('search_keyword', TRUE);
+        $data['orders'] = $this->Order->search($search_keyword, $status);
+        // var_dump($data['orders']);
+        $this->load->view('/partials/admins/orders', $data);
     }
 
     public function is_valid_image($uploaded_images){

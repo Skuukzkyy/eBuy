@@ -171,6 +171,7 @@ class Users extends CI_Controller {
 		$json_billing_address = json_encode($billing_address);
 		$this->Order->new($user_id, $json_ordered_prodducts, $json_shipping_address, $json_billing_address, $sub_total);
 		$this->Cart->delete_all($user_id);
+		redirect('/users/carts');
 	}
 
 	public function history(){

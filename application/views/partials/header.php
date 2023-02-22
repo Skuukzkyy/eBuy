@@ -10,13 +10,20 @@
 ?>
 		<a href="/users/profile">Settings</a>
 		<a href="/users/carts">Shopping Cart (<?= $cart_count['total'] ?>)</a>
-<?php        }       
-        }else{
+<?php	
+		}else{
+?>
+		<a href="/dashboard/orders">Orders</a>
+		<a href="/">Products</a>
+<?php
+		}
+
+	}else{
 ?>
         <a href="/users/login">Login</a>
         <a href="/users/register">Register</a>
 <?php
-		}
+	}
 ?>
 	</header>  
 </div>
