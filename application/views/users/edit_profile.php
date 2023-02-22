@@ -10,24 +10,16 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>        
         <link rel="stylesheet" href="/assets/css/edit-profile-style.css"/>
         <link rel="stylesheet" href="/assets/css/header.css"/>
-        <script>
-            $(document).ready(function() {
-                $("#message-dialog").dialog({
-                    autoOpen: false
-                });
-                $(document).on('click', 'input[type="submit"]', function() {
-                    $('#message-dialog').html($(this).attr('message'));
-                    $("#message-dialog").dialog("open");
-                    return false;
-                });
-            });
-        </script>
+        <script src="/assets/js/edit_profile.js"></script>
     </head>
     <body>
-        <div id="message-dialog"></div>
+        <div class="error"><?= $this->session->flashdata('error_message') ?></div>
+        <div class="success"><?= $this->session->flashdata('success_message') ?></div>
+
         <fieldset>            
             <legend>Edit Password</legend>
-            <form>
+            <form method="POST" action="/users/update_password">
+                <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
                 <label for="old_password">Old Password:</label>
                 <input type="password" name="old_password" />
     
@@ -43,27 +35,28 @@
 
         <fieldset>
             <legend>Edit Default Shipping</legend>
-            <form>
+            <form method="POST" action="/users/update_shipping">
+                <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
                 <label for="first_name">First Name:</label>
-                <input type="text" name="first_name" />
+                <input type="text" name="first_name" value="<?= (empty($shipping_address['first_name'])) ? '' : $shipping_address['first_name'] ?>" />
 
                 <label for="last_name">Last Name:</label>
-                <input type="text" name="last_name" />
+                <input type="text" name="last_name" value="<?= (empty($shipping_address['last_name'])) ? '' : $shipping_address['last_name'] ?>" />
 
                 <label for="address1">Address:</label>
-                <textarea name="address1"></textarea>
+                <textarea name="address1"><?= (empty($shipping_address['address'])) ? '' : $shipping_address['address'] ?></textarea>
                 
                 <label for="address">Address 2:</label>
-                <textarea name="address2"></textarea>
+                <textarea name="address2"><?= (empty($shipping_address['alternative_address'])) ? '' : $shipping_address['alternative_address'] ?></textarea>
 
                 <label for="city">City:</label>
-                <input type="text" name="city"></textarea>
+                <input type="text" name="city" value="<?= (empty($shipping_address['city'])) ? '' : $shipping_address['city'] ?>"></textarea>
 
                 <label for="state">State:</label>
-                <input type="text" name="state">
+                <input type="text" name="state" value="<?= (empty($shipping_address['state'])) ? '' : $shipping_address['state'] ?>">
 
                 <label for="zipcode">Zipcode:</label>
-                <input type="text" name="zipcode">
+                <input type="text" name="zipcode" value="<?= (empty($shipping_address['zip_code'])) ? '' : $shipping_address['zip_code'] ?>">
 
                 <input type="submit" message="Shipping information successfully updated!" value="Save">
             </form>
@@ -71,28 +64,29 @@
 
         <fieldset>
             <legend>Edit Default Billing</legend>
-            <form>
+            <form method="POST" action="/users/update_billing">
+                <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
                 <label for="first_name">First Name:</label>
-                <input type="text" name="first_name" />
-                
+                <input type="text" name="first_name" value="<?= (empty($billing_address['first_name'])) ? '' : $billing_address['first_name'] ?>" />
+
                 <label for="last_name">Last Name:</label>
-                <input type="text" name="last_name" />
+                <input type="text" name="last_name" value="<?= (empty($billing_address['last_name'])) ? '' : $billing_address['last_name'] ?>" />
 
                 <label for="address1">Address:</label>
-                <textarea name="address1"></textarea>
+                <textarea name="address1"><?= (empty($billing_address['address'])) ? '' : $billing_address['address'] ?></textarea>
                 
                 <label for="address">Address 2:</label>
-                <textarea name="address2"></textarea>
+                <textarea name="address2"><?= (empty($billing_address['alternative_address'])) ? '' : $billing_address['alternative_address'] ?></textarea>
 
                 <label for="city">City:</label>
-                <input type="text" name="city">
+                <input type="text" name="city" value="<?= (empty($billing_address['city'])) ? '' : $billing_address['city'] ?>"></textarea>
 
                 <label for="state">State:</label>
-                <input type="text" name="state">
-    
+                <input type="text" name="state" value="<?= (empty($billing_address['state'])) ? '' : $billing_address['state'] ?>">
+
                 <label for="zipcode">Zipcode:</label>
-                <input type="text" name="zipcode">
-    
+                <input type="text" name="zipcode" value="<?= (empty($billing_address['zip_code'])) ? '' : $billing_address['zip_code'] ?>">
+
                 <label for="card">Card:</label>
                 <input type="text" name="card">
     

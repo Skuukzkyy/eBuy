@@ -9,6 +9,11 @@
                 </thead>
                 <tbody>
 <?php
+    if($cart_items == null){
+?>
+                    <tr><td colspan=4>Cart is empty</td></tr>
+<?php
+    }
     $total = 0;
     foreach($cart_items as $item){
         $total += $item['product_price'] * $item['quantity'];

@@ -3,6 +3,26 @@
     padding: 0px;
     box-sizing: border-box;
 }
+.error {
+    color: white;
+    width: 100%;
+    text-align: center;
+    background-color: red;
+    margin: 0 auto;
+}
+    .error p {
+        text-align: center;
+    }    
+.success {
+    color: white;
+    width: 100%;
+    text-align: center;
+    background-color: green;
+    margin: 0 auto;
+}
+    .success p {
+        text-align: center;
+    } 
 div[role="dialog"] {
     width:400px !important;
 }
