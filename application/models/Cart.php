@@ -33,6 +33,10 @@ class Cart extends CI_Model {
         $this->db->query("DELETE FROM cart_products WHERE product_id = ? AND user_id = ?", array($product_id, $user_id));
     }
 
+    function delete_all($user_id){
+        $this->db->query("DELETE FROM cart_products WHERE user_id = ?", array($user_id));
+    }
+
     function count(){
         return $this->db->query("SELECT COUNT(*) as total FROM cart_products WHERE user_id = ?", array($this->session->userdata('user_id')))->row_array();
     }

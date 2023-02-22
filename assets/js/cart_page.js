@@ -3,9 +3,6 @@ $(document).ready(function() {
     $("#message-dialog").dialog({
         autoOpen: false
     });
-    $('#message-dialog').on('dialogclose', function(event) {
-        location.href="order_history.html";
-    });
 
     $(document).on('change', '.cart_item_quantity', function(){
         var form = $(this).parent()
@@ -26,15 +23,6 @@ $(document).ready(function() {
                 update_header();
             });
         }
-    });
-
-    $(document).on('click', "#pay_button", function() {
-        $("#message-dialog").dialog("open");
-        return false;
-    });
-
-    $(document).on('submit', 'form', function(){
-        return false;
     });
 
     load_cart_items();

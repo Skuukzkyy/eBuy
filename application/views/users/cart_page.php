@@ -19,62 +19,62 @@
         </div>
         <a href="#">View Order History</a>
         
-        <div id="message-dialog">Order success!</div>
         <section id="cart_items_table">
 
         </section>
-        <form>
+        <form method="POST" action="/users/checkout" id="checkout">
+            <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
             <h3>Shipping Information</h3>
 
             <label for="first_name">First Name:</label>
-            <input type="text" name="first_name" />
-
-            <label for="city">City:</label>
-            <input type="text" name="city"></textarea>
+            <input type="text" name="shipping_first_name" value="<?= (empty($shipping_address['first_name'])) ? '' : $shipping_address['first_name'] ?>" />
 
             <label for="last_name">Last Name:</label>
-            <input type="text" name="last_name" />
-
-            <label for="state">State:</label>
-            <input type="text" name="state">
+            <input type="text" name="shipping_last_name" value="<?= (empty($shipping_address['last_name'])) ? '' : $shipping_address['last_name'] ?>" />
 
             <label for="address1">Address:</label>
-            <textarea name="address1"></textarea>
+            <textarea name="shipping_address1"><?= (empty($shipping_address['address'])) ? '' : $shipping_address['address'] ?></textarea>
+            
+            <label for="address">Address 2:</label>
+            <textarea name="shipping_address2"><?= (empty($shipping_address['alternative_address'])) ? '' : $shipping_address['alternative_address'] ?></textarea>
+
+            <label for="city">City:</label>
+            <input type="text" name="shipping_city" value="<?= (empty($shipping_address['city'])) ? '' : $shipping_address['city'] ?>"></textarea>
+
+            <label for="state">State:</label>
+            <input type="text" name="shipping_state" value="<?= (empty($shipping_address['state'])) ? '' : $shipping_address['state'] ?>">
 
             <label for="zipcode">Zipcode:</label>
-            <input type="text" name="zipcode">
+            <input type="text" name="shipping_zipcode" value="<?= (empty($shipping_address['zip_code'])) ? '' : $shipping_address['zip_code'] ?>">
 
-            <label for="address">Address 2:</label>
-            <textarea name="address2"></textarea>
             <!----------------------------------->
             <h3>Billing Information</h3>
 
             <label for="first_name">First Name:</label>
-            <input type="text" name="first_name" />
-            
-            <label for="state">State:</label>
-            <input type="text" name="state">
+            <input type="text" name="billing_first_name" value="<?= (empty($billing_address['first_name'])) ? '' : $billing_address['first_name'] ?>" />
 
             <label for="last_name">Last Name:</label>
-            <input type="text" name="last_name" />
-
-            <label for="zipcode">Zipcode:</label>
-            <input type="text" name="zipcode">
+            <input type="text" name="billing_last_name" value="<?= (empty($billing_address['last_name'])) ? '' : $billing_address['last_name'] ?>" />
 
             <label for="address1">Address:</label>
-            <textarea name="address1"></textarea>
-
-            <label for="card">Card:</label>
-            <input type="text" name="card">
-
+            <textarea name="billing_address1"><?= (empty($billing_address['address'])) ? '' : $billing_address['address'] ?></textarea>
+            
             <label for="address">Address 2:</label>
-            <textarea name="address2"></textarea>
-
-            <label for="security_code">Card Security Code:</label>
-            <input type="text" name="security_code">
+            <textarea name="billing_address2"><?= (empty($billing_address['alternative_address'])) ? '' : $billing_address['alternative_address'] ?></textarea>
 
             <label for="city">City:</label>
-            <input type="text" name="city">
+            <input type="text" name="billing_city" value="<?= (empty($billing_address['city'])) ? '' : $billing_address['city'] ?>"></textarea>
+
+            <label for="state">State:</label>
+            <input type="text" name="billing_state" value="<?= (empty($billing_address['state'])) ? '' : $billing_address['state'] ?>">
+
+            <label for="zipcode">Zipcode:</label>
+            <input type="text" name="billing_zipcode" value="<?= (empty($billing_address['zip_code'])) ? '' : $billing_address['zip_code'] ?>">
+            
+            <label for="card">Card:</label>
+            <input type="text" name="billing_card">
+            <label for="security_code">Card Security Code:</label>
+            <input type="text" name="security_code">
 
             <label for="expiration">Card Expiration:</label>
             <input type="month" name="expiration">

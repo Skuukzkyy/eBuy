@@ -87,15 +87,6 @@
                 <label for="zipcode">Zipcode:</label>
                 <input type="text" name="zipcode" value="<?= (empty($billing_address['zip_code'])) ? '' : $billing_address['zip_code'] ?>">
 
-                <label for="card">Card:</label>
-                <input type="text" name="card">
-    
-                <label for="security_code">Card Security Code:</label>
-                <input type="text" name="security_code">
-    
-                <label for="expiration">Card Expiration:</label>
-                <input type="month" name="expiration">
-    
                 <input type="submit" message="Billing information successfully updated!" value="Save">
             </form>
         </fieldset>

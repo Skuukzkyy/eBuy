@@ -7,6 +7,7 @@ class Users extends CI_Controller {
 		parent::__construct();
 		$this->load->model('User');
 		$this->load->model('Cart');
+		$this->load->model('Order');
 	}
 
 	public function login(){
@@ -104,6 +105,8 @@ class Users extends CI_Controller {
 	
     public function carts(){
 		$data['cart_count']  = $this->Cart->count();
+		$data['shipping_address'] = $this->User->get_shipping($this->session->userdata('user_id'));
+		$data['billing_address'] = $this->User->get_billing($this->session->userdata('user_id'));
 		$this->load->view('/partials/header', $data);
         $this->load->view('/users/cart_page');
     }
@@ -125,6 +128,49 @@ class Users extends CI_Controller {
 	public function load_cart_items(){
 		$data['cart_items'] = $this->Cart->get_all($this->session->userdata('user_id'));
         $this->load->view('/partials/products_page/cart_items', $data);
+	}
+
+	public function checkout(){
+		$user_id = $this->session->userdata('user_id');
+		echo $user_id;
+		var_dump($this->input->post(NULL, TRUE));
+		$form_data = $this->input->post(NULL, TRUE);
+		$cart_items = $this->Cart->get_all($user_id);
+		$sub_total = 0;
+		foreach($cart_items as $cart_item){
+			$sub_total += $cart_item['product_price'] * $cart_item['quantity'];
+			$ordered_products['ordered_products'][] = array(
+				"product_id" => $cart_item['product_id'],
+				"product_name" => $cart_item['product_name'],
+				"product_price" => $cart_item['product_price'],
+				"quantity" => $cart_item['quantity'],
+				"total" => $cart_item['product_price'] * $cart_item['quantity']
+			);
+		}
+		$json_ordered_prodducts = json_encode($ordered_products);
+		$shipping_address['shipping_address'] = array(
+			"name" => $form_data['shipping_first_name']. ' ' .$form_data['shipping_last_name'],
+			"address" => $form_data['shipping_address1'],
+			"alternative_address" => $form_data['shipping_address2'],
+			"city" => $form_data['shipping_city'],
+			"state" => $form_data['shipping_state'],
+			"zip_code" => $form_data['shipping_zipcode']
+		);
+
+		$billing_address['billing_address'] = array(
+			"name" => $form_data['billing_first_name']. ' ' .$form_data['billing_last_name'],
+			"address" => $form_data['billing_address1'],
+			"alternative_address" => $form_data['billing_address2'],
+			"city" => $form_data['billing_city'],
+			"state" => $form_data['billing_state'],
+			"zip_code" => $form_data['billing_zipcode']
+		);
+		
+		var_dump($cart_items);
+		$json_shipping_address = json_encode($shipping_address);
+		$json_billing_address = json_encode($billing_address);
+		$this->Order->new($user_id, $json_ordered_prodducts, $json_shipping_address, $json_billing_address, $sub_total);
+		$this->Cart->delete_all($user_id);
 	}
 
 	public function history(){
