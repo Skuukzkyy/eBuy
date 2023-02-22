@@ -187,6 +187,9 @@ class Admins extends CI_Controller {
     }
 
     public function orders_show($order_id){
+        if(!$this->session->userdata('is_admin')){
+            redirect('/users/login');
+        }
         $this->load->view('/partials/header');
         $this->load->view('/admins/order_details');
     }

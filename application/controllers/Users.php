@@ -8,6 +8,7 @@ class Users extends CI_Controller {
 		$this->load->model('User');
 		$this->load->model('Cart');
 		$this->load->model('Order');
+		$this->load->model('Product');
 	}
 
 	public function login(){
@@ -166,9 +167,12 @@ class Users extends CI_Controller {
 			"zip_code" => $form_data['billing_zipcode']
 		);
 		
-		var_dump($cart_items);
 		$json_shipping_address = json_encode($shipping_address);
 		$json_billing_address = json_encode($billing_address);
+		$this->output->enable_profiler(TRUE);
+		foreach($cart_items as $cart_item){
+			echo $this->Product->add_sold_items($cart_item);
+		}
 		$this->Order->new($user_id, $json_ordered_prodducts, $json_shipping_address, $json_billing_address, $sub_total);
 		$this->Cart->delete_all($user_id);
 		redirect('/users/carts');

@@ -47,6 +47,14 @@ class Product extends CI_Model {
         return $this->db->query($query, $values)->result_array();
     }
 
+    function add_sold_items($cart_item){
+        $product = $this->get_by_id($cart_item['product_id']);
+        $old_quantity_sold = $product['quantity_sold'];
+        $new_quantity_sold = $cart_item['quantity'] + $old_quantity_sold;
+        // return $new_quantity_sold;
+        $this->db->query("UPDATE products SET quantity_sold = ? WHERE id = ?", array($new_quantity_sold, $cart_item['product_id']));
+    }
+
     function create($form_data){
         $query = "INSERT INTO products(category_id, name, description, price, inventory_count, images)
                 VALUES(?,?,?,?,?,?)
