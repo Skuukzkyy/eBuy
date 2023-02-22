@@ -6,8 +6,6 @@
 <div class="loader-dialog">
                 <img src="/assets/img/ajax-loader.gif"/>
             </div>
-    <h1>images</h1>
-            <h2><?= var_dump($product_images->others) ?></h2>
             <form action="/admins/update_product/<?= $product_id ?>" method="POST" id="edit_product">
                 <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" id="csrf"/>
                 <input type="hidden" name="product_id" id="product_id" value="<?= $product_details['id'] ?>">
@@ -43,7 +41,7 @@
                         <img data-file-name="<?= $product_images->main ?>" class="product_image" src="/assets/img/products/<?= $product_id ?>/<?= $product_images->main ?>"/>
                         <p><?= $product_images->main ?></p>
                         <img class="remove_image" src="/assets/img/trash-can.png"/>
-                        <input type="radio" name="main" value="<?= $product_images->main ?>" checked>
+                        <input type="radio" name="main" value="<?= $product_images->main ?>" checked required>
                         <label>main</label><br>
                     </li>
                     <!-- other images -->

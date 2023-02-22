@@ -49,6 +49,25 @@ class Product extends CI_Model {
         $this->db->query($query, $values);
     }
 
+    function update($form_data){
+        $query = "UPDATE products
+                SET category_id = ?, name = ?, description  = ?, price =  ?, inventory_count = ?, images = ?, updated_at = ?
+                WHERE  id = ?
+        ";
+        $values = array(
+            $form_data['category'],
+            $form_data['name'],
+            $form_data['description'],
+            $form_data['price'],
+            $form_data['stock'],
+            $form_data['images'],
+            date("Y-m-d H:i:s"),
+            $form_data['product_id']
+        );
+
+        $this->db->query($query, $values);
+    }
+
     function delete($product_id){
         $this->db->query("DELETE FROM products WHERE id = ?", $product_id);
     }

@@ -51,9 +51,40 @@ class Admins extends CI_Controller {
         $form_data = $this->input->post();
         $result = $this->Product->validate();
         if($result === 'success'){
+            if(empty($form_data['main'])){
+                $this->session->set_flashdata('error_message', "Please choose main Image");
+                redirect('/dashboard/products');
+                die();
+            }
+            // if new categfory gawa bago
+            $is_existing_category = $this->Category->get_by_id($form_data['category']);
+            if(!$is_existing_category){
+                $form_data['category'] = $this->Category->create($form_data['category']);
+            }
+
+            // delete all other images in the directory
+            $upload_path = "D:/village88/Capstone/ebuy/assets/img/products/$form_data[product_id]";
+            var_dump($upload_path);
+            $directory_files = array_diff(scandir($upload_path), array('.', '..'));
+            foreach($directory_files as $file){
+                if(!in_array($file, $form_data['new_images'])){
+                    unlink("$upload_path/$file");
+                }
+                echo "<br>";
+            }
+
             var_dump($form_data);
-            $images = array('main' => $form_data['main']);
-            var_dump($images);
+            $main_image_key = array_search($form_data['main'], $form_data['new_images']);
+            unset($form_data['new_images'][$main_image_key]);
+            $images = array(
+                'main' => $form_data['main'],
+                'others' => $form_data['new_images']
+            );
+            $form_data['images'] = json_encode($images);
+            $this->Product->update($form_data);
+            $this->session->set_flashdata('success_message', 'Product Updated Successfully');
+
+            redirect('/dashboard/products');
         }else{
             $this->session->set_flashdata('error_message', $result);
             redirect('/dashboard/products');
@@ -97,8 +128,11 @@ class Admins extends CI_Controller {
                 // get the max id in the product table so that I know the id of this product will be and create directory for it
                 $product_id = $this->Product->get_max_id()['max_id'] + 1;
                 $upload_path = "D:/village88/Capstone/ebuy/assets/img/products/$product_id";
+
                 // create directory if not exist
-                if (!is_dir($upload_path)) {
+                var_dump($upload_path);
+                if (is_dir($upload_path) == false) {
+                    echo "pols";
                     mkdir($upload_path, 7777, TRUE);
                 }
                 // loop through sa lahat ng laman to move image to the product folder

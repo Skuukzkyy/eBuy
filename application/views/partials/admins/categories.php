@@ -8,7 +8,7 @@
                             <section>
                                 <input class="category" type="text" value="<?= $category['name'] ?>" data-category-id="<?= $category['id'] ?>" readonly/>
                                 <img class="edit" src="/assets/img/pencil.png"/>
-                                <img class="remove" title="Hardware" src="/assets/img/trash-can.png"/>
+                                <img class="remove" title="<?= $category['name'] ?>" src="/assets/img/trash-can.png"/>
                             </section>
 <?php
     }

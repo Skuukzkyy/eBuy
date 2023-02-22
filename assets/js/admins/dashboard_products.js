@@ -74,13 +74,16 @@ $(document).ready(function(){
 
     // delete category
     $(document).on('click', "form img.remove", function(){
-        var category_id = $(this).siblings('input.category').attr('data-category-id');
-        $.get('/admins/delete_category/'+category_id, function(res){
-            $('form#search').submit();
-        })
-        .fail(function(error){
-            $('div.error').text('Cannot delete category that basta may benta pa sa category na ito');
-        });
+        if(confirm($(this).attr('title') + " will be deleted. Click to confirm.")) {
+            var category_id = $(this).siblings('input.category').attr('data-category-id');
+            $.get('/admins/delete_category/'+category_id, function(res){
+                $('form#search').submit();
+            })
+            .fail(function(error){
+                $('div.error').text('Cannot delete category that basta may benta pa sa category na ito');
+            });
+        }
+        
     });
 
     //pindutan ng update/add category
@@ -133,15 +136,13 @@ $(document).ready(function(){
         var list_tags = $('form#edit_product').children('ul').children('li');
         var input_file = $(this);
         let files = input_file[0].files;
-        // console.log(input_file);
+        console.log(files);
 
         if(list_tags.length + files.length > 4){
             alert("You can only add 4 images to your product");
             return false;
         }
         var form_data = new FormData();
-        form_data.append("name", "jerick");
-        form_data.append("age", "21");
         // console.log(files.length)
         if (files[0] != undefined){
             for (var i = 0; i < files.length; i++) {
@@ -160,21 +161,26 @@ $(document).ready(function(){
             contentType: false,     
             cache: false,
             success: function (res){
-                var images = JSON.parse(res);
-                console.log(images.names[0]);
+                try {
+                    var images = JSON.parse(res);
+                }catch(error){
+                    alert("Invalid Image Format!");
+                    return false;
+                }
                 var html_img_string = '';
                 for (var i = 0; i < images.names.length; i++) {
                     var image_name = images.names[i];
-                    
+                    console.log(image_name)
                     html_img_string += "<li class=ui-state-default>";
                     html_img_string += "<img src=/assets/img/draggable.png>";
-                    html_img_string += "<img data-file-name=" +image_name+ " class=product_image src=/assets/img/products/" +$('#product_id').val()+ "/" +image_name+ ">";
+                    html_img_string += "<img data-file-name=" +encodeURIComponent(image_name)+ " class=product_image src=/assets/img/products/" +$('#product_id').val()+ "/" +encodeURIComponent(image_name)+ ">";
                     html_img_string += "<p>" +image_name+ "</p>";
                     html_img_string += "<img class=remove_image src=/assets/img/trash-can.png>";
-                    html_img_string += "<input type=radio name=main value=" +image_name+ ">";
+                    html_img_string += "<input type=radio name=main value=" +encodeURIComponent(image_name)+ " required>";
                     html_img_string += "<label>main</label><br>";
                     html_img_string += "</li>";
                 }
+                console.log(html_img_string)
                 $('#sortable').append(html_img_string);
             }
         });
@@ -190,7 +196,7 @@ $(document).ready(function(){
             const image_name = $(li).children('img.product_image').attr('data-file-name');            
             console.log(image_name)
             
-            $(this).append('<input type="hidden" name=new_images[] value=' +image_name+ '>');
+            $(this).append('<input type="hidden" name=new_images[] value=' +encodeURIComponent(image_name)+ '>');
         }
         return true;
     });
