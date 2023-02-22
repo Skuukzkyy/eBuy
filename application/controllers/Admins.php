@@ -42,6 +42,10 @@ class Admins extends CI_Controller {
         echo json_encode($response);
     }
 
+    public function product_preview(){
+        $this->load->view('/products/product_preview');
+    }
+
     public function update_category(){
         $form_data = $this->input->get(NULL, TRUE);
         $this->Category->update($form_data);
@@ -165,6 +169,9 @@ class Admins extends CI_Controller {
 
     public function delete_product($product_id){
         $this->Product->delete($product_id);
+        $upload_path = "D:/village88/Capstone/ebuy/assets/img/products/$product_id";
+        array_map('unlink', glob("$upload_path/*.*"));
+        rmdir($upload_path);
     }
 
     public function delete_category($category_id){
@@ -189,7 +196,7 @@ class Admins extends CI_Controller {
         }
 
         $image_types = $uploaded_images['type'];
-        $valid_types = array('image/png', 'image/jpeg', 'image/jpg');
+        $valid_types = array('image/png', 'image/jpeg', 'image/jpg', 'image/webp');
         foreach ($image_types as $image_type){
             if(!in_array($image_type, $valid_types)){
                 return "Unsupported file type $image_type";
@@ -200,7 +207,7 @@ class Admins extends CI_Controller {
 
     // public function test(){
     //     echo "<pre>";
-    //     echo $this->input->get('category_id');
+    //         echo 123;
     //     echo "</pre>";
     // }
 }

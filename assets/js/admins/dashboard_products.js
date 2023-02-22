@@ -206,7 +206,7 @@ $(document).ready(function(){
     });
     //Preview in product modal
     $(document).on('click', "button#preview", function(){
-        window.open('product_details.html', '_blank');
+        window.open('/admins/product_preview', '_blank');
     });
 
     //Product or Category delete
