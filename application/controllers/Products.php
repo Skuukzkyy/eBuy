@@ -41,7 +41,6 @@ class Products extends CI_Controller {
 	}
 
     public function show($product_id){
-		$this->output->enable_profiler(TRUE);
 		$data['cart_count']  = $this->Cart->count();
 		$data['product_details'] = $this->Product->get_by_id($product_id);
 		$data['similar_products'] = $this->Product->get_similar_product($data['product_details']['category_id'], $product_id);

@@ -27,6 +27,9 @@ $(document).ready(function() {
             $("main em").fadeIn(200);
             $("main em").fadeOut(1000);
         });
+        // .fail(function(){
+        //     alert("You need to login ");
+        // });
         return false;
     });
 });

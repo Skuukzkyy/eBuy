@@ -3,7 +3,7 @@
     $product_id = $product_details['id'];
 ?>
 
-<div class="loader-dialog">
+            <div class="loader-dialog">
                 <img src="/assets/img/ajax-loader.gif"/>
             </div>
             <form action="/admins/update_product/<?= $product_id ?>" method="POST" id="edit_product">

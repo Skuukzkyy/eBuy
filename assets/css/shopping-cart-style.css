@@ -4,6 +4,22 @@
     box-sizing: border-box;
     color: #675c67;
 }
+.loader-dialog {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    z-index: 100;
+    display:none;
+    margin: 0;
+}
+.loader-dialog img {
+    position: relative;
+    left:50%;
+    top: 15%;
+}
+div#image-preview-dialog img {
+    width: 400px;
+}
 div[role="dialog"] {
     width:300px !important;
 }
@@ -56,7 +72,7 @@ section table {
         tbody tr td {
             background-color:white;
         }
-        section table tbody tr td input {
+        section table tbody tr td {
             padding-left: 20px;
         }
         section table tbody tr td img {
@@ -82,7 +98,7 @@ section table {
             text-align: right;
         }
         section input[type="number"] {
-            width:50px;
+            width:45px;
         }
 .editable-qty {
     pointer-events: all;

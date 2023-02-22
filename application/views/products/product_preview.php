@@ -36,10 +36,22 @@
             <p><?= $product_details['description'] ?></p>
             <form>
                 <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
-                <span orig-price="<?= $product_details['price'] ?>">(₱<?= $product_details['price'] ?>)</span>
+                
                 <input type="hidden" name="product_id" value="<?= $product_details['id'] ?>">
+<?php
+    if($this->session->userdata('user_id') != null){
+?>
+                <span orig-price="<?= $product_details['price'] ?>">(₱<?= $product_details['price'] ?>)</span>
                 <input type="number" name="quantity" value="1" min="1">
                 <input type="submit" value="Buy" />
+<?php
+    }else{
+?>
+                <a href="/users/login" id="login">Login to buy</a>
+<?php
+    }
+?>
+
             </form>
             <em>Item added to the cart!</em>
         </main>
