@@ -5,7 +5,7 @@
         }
 ?>
                 <figure>
-                    <a href="./product_details.html">
+                    <a href="/products/show/<?= $products[$i]['id'] ?>">
 <?php                   $images = json_decode($products[$i]['images']); ?>
                         <img src="/assets/img/products/<?= $products[$i]['id'] ?>/<?= $images->main ?>"/>
                         <p><?= $products[$i]['price'] ?></p>

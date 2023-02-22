@@ -41,7 +41,7 @@ class Users extends CI_Controller {
 		$result = $this->User->validate($form_data);
 		if($result === 'success'){
 			$this->User->create($form_data);
-			redirect('/');
+			redirect('/users/login');
 		}else{
 			$this->session->set_flashdata('error_message', $result);
 			redirect('/users/register');

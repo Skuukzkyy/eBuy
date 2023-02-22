@@ -7,16 +7,22 @@ class Products extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Product');
 		$this->load->model('Category');
+		$this->load->model('Cart');
+	}
+
+	public function update_header(){
+		$data['cart_count']  = $this->Cart->count();
+		$this->load->view('/partials/header', $data);
 	}
 
 	public function index(){
 		if($this->session->userdata('is_admin')){
             redirect('/dashboard/products');
         }
-
 		$data['categories'] = $this->Category->get_category_with_product();
+		$data['cart_count']  = $this->Cart->count();
 
-		$this->load->view('/partials/header');
+		$this->load->view('/partials/header', $data);
 		$this->load->view('/products/products_page', $data);
 	}
 
@@ -35,9 +41,30 @@ class Products extends CI_Controller {
 	}
 
     public function show($product_id){
-		$this->load->view('/partials/header');
-        $this->load->view('/products/item_page.php');
+		$this->output->enable_profiler(TRUE);
+		$data['cart_count']  = $this->Cart->count();
+		$data['product_details'] = $this->Product->get_by_id($product_id);
+		$data['similar_products'] = $this->Product->get_similar_product($data['product_details']['category_id'], $product_id);
+		// var_dump($data['similar_products']);
+		$this->load->view('/partials/header', $data);
+        $this->load->view('/products/product_preview', $data);
     }
+
+	public function add_to_cart(){
+		$form_data = $this->input->post(NULL, TRUE);
+		$result = $this->Cart->validate();
+		if($result == 'success'){
+			$this->Cart->add($form_data);
+			echo 'success';
+		}else{
+			echo $result;
+		}
+
+	}
+
+
+
+
 
 	public function test(){
 		$this->output->enable_profiler(TRUE);

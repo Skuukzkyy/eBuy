@@ -23,6 +23,12 @@ class Product extends CI_Model {
         return $this->db->query($query, $values)->row_array();
     }
 
+    function get_similar_product($category_id, $product_id){
+        $query ="SELECT * FROM products WHERE category_id = ? AND id != ?";
+        $values = array($category_id, $product_id);
+        return $this->db->query($query, $values)->result_array();
+    }
+
     function get_max_id(){
         return $this->db->query("SELECT MAX(id) as max_id FROM products")->row_array();
     }

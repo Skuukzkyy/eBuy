@@ -47,7 +47,7 @@ main {
         }
         main figure img:first-of-type {
             width: 217px;
-            height: 100%; 
+            height: 250px;
             margin-bottom: 10px;
         }
     main > p {
@@ -89,7 +89,7 @@ footer {
 }
     footer figure{
         text-align: center;
-        width: 70px;
+        width: 100px;
         display: inline-block;
         vertical-align: top;
         margin: 35px 15px -5px 35px;
@@ -103,7 +103,8 @@ footer {
                 color: black;
             }
         footer figure a img {
-            width: 90px;            
+            width: 90px;     
+            height: 90px;       
             border: 1px solid black;
             background-color: rgba(240, 238, 238, 0.911);
             border: 1px solid lightgray;
