@@ -3,6 +3,17 @@
     padding: 0px;
     box-sizing: border-box;
 }
+.fail{
+    background-color: red;
+    color: white;
+}
+.in_progress{
+    background-color: orange;
+    color: white;
+}
+.success{
+    background-color: lightgreen;
+}
 body {
     background-color: #e2e2e2;
     font-family: Helvetica;
@@ -57,7 +68,6 @@ section {
         }
     section > p {
         display: inline-block;
-        background-color: lightgreen;
         width: 200px;
         padding:1px 0 1px 15px;
         margin-right: 50px;

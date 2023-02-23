@@ -31,7 +31,6 @@
             <p><?= $product_details['description'] ?></p>
             <form>
                 <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
-                
                 <input type="hidden" name="product_id" value="">
 
                 <span orig-price="<?= $product_details['price'] ?>">(₱<?= $product_details['price'] ?>)</span>

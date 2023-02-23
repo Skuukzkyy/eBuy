@@ -4,11 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Product extends CI_Model {
 
     function get_all(){
-        return $this->db->query("SELECT * FROM products")->result_array();
+        return $this->db->query("SELECT * FROM products ORDER BY id DESC")->result_array();
     }
 
     function get_by_name_or_id($search_keyword){
-        $query = "SELECT * FROM products WHERE id = ? OR name LIKE ?";
+        $query = "SELECT * FROM products WHERE id = ? OR name LIKE ? ORDER BY id DESC";
         $values = array($search_keyword, "%$search_keyword%");
         return $this->db->query($query, $values)->result_array();
     }

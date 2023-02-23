@@ -4,7 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Order extends CI_Model {
 
     function get_all(){
-        return $this->db->query("SELECT orders.*, users.first_name, users.last_name FROM orders INNER JOIN users ON users.id = orders.user_id")->result_array();
+        return $this->db->query("SELECT orders.*, users.first_name, users.last_name FROM orders INNER JOIN users ON users.id = orders.user_id ORDER BY orders.id DESC")->result_array();
+    }
+
+    function get_by_id($order_id){
+        return $this->db->query("SELECT * FROM orders WHERE id = ?", array($order_id))->row_array();
     }
 
     function update_order_status($order_id, $status){
@@ -22,6 +26,7 @@ class Order extends CI_Model {
             $query .= " AND status = ?";
             $values[] = $status;
         }
+        $query.= " ORDER BY orders.id DESC";
         // $values[] = $query;
         // return $values;
         return $this->db->query($query, $values)->result_array();
