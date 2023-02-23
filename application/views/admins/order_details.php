@@ -58,7 +58,7 @@
 ?>
                     <tr>
                         <td><?= $product->product_id ?></td>
-                        <td><?= $product->product_name ?></td>
+                        <td class="product_name"><?= $product->product_name ?></td>
                         <td>₱<?= $product->product_price ?></td>
                         <td><?= $product->quantity ?></td>
                         <td>₱<?= $product->total ?></td>

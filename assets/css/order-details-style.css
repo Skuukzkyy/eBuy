@@ -19,7 +19,7 @@ body {
     font-family: Helvetica;
 }    
     body * {
-        color: #675c67;
+        color: black;
     }
     body header a, body header h2 {
         color: rgba(135, 165, 179, 0.945);
@@ -58,6 +58,9 @@ section {
         thead tr {
             background-color: lightgray;
         }
+        td.product_name {
+            width: 400px;
+        }
         td, th {
             border: 1px solid gray;
             text-align: left;
@@ -76,4 +79,7 @@ section {
         background-color: rgb(245, 245, 245);        display: inline-block;
         vertical-align: text-top;
         padding: 10px 30px 10px 10px;
+        /* width: 300px; */
+        margin-left: 160px;
+        font-size: 1.3rem;
     }

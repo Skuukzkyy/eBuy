@@ -213,7 +213,7 @@ class Users extends CI_Controller {
 	public function send_email($products_list, $sub_total){
 		$products_string = '';
 		foreach($products_list as $product){
-			$products_string .= $product. '<br>';
+			$products_string .= '<br><strong>' .$product. '</strong><br>';
 		}
 		$this->load->library('phpmailer_lib');
 		// PHPMailer object

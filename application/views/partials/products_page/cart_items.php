@@ -19,7 +19,7 @@
         $total += $item['product_price'] * $item['quantity'];
 ?>
                     <tr>
-                        <td><?= $item['product_name'] ?></td>
+                        <td class="product_name"><?= $item['product_name'] ?></td>
                         <td>₱<?= $item['product_price'] ?></td>
                         <td>
                             <form id="update_cart" action="/users/update_cart_quantity" method="POST">
