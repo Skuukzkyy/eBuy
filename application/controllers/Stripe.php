@@ -41,7 +41,7 @@ class Stripe extends CI_Controller {
                 "amount" => $this->input->post('amount'),
                 "currency" => "usd",
                 "source" => $this->input->post('tokenId'),
-                "description" => "Test payment from jerick."
+                "description" => "Payment for ordered products."
         ]);
        // after successfull payment, you can store payment related information into your database
 

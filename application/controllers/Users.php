@@ -139,16 +139,18 @@ class Users extends CI_Controller {
 		$validate = $this->Order->validate();
 		if($validate != 'success'){
 			$this->session->set_flashdata('error_message', $validate);
-			redirect('/users/carts');
+			echo 'fail';
+			return FALSE;
 		}
 		$user_id = $this->session->userdata('user_id');
-		var_dump($this->input->post(NULL, TRUE));
+		// var_dump($this->input->post(NULL, TRUE));
 
 		$this->Order->validate();
 		$cart_items = $this->Cart->get_all($user_id);
 		if($cart_items == null){
 			$this->session->set_flashdata('error_message', 'There is no product in the cart');
-			redirect('/users/carts');
+			echo 'fail';
+			return FALSE;
 		}
 		$sub_total = 0;
 		foreach($cart_items as $cart_item){
@@ -182,14 +184,14 @@ class Users extends CI_Controller {
 		
 		$json_shipping_address = json_encode($shipping_address);
 		$json_billing_address = json_encode($billing_address);
-		$this->output->enable_profiler(TRUE);
 		foreach($cart_items as $cart_item){
-			echo $this->Product->add_sold_items($cart_item);
+			$this->Product->add_sold_items($cart_item);
 		}
 		$this->session->set_flashdata('success_message', 'Ordered Successfully.');
 		$this->Order->new($user_id, $json_ordered_prodducts, $json_shipping_address, $json_billing_address, $sub_total);
 		$this->Cart->delete_all($user_id);
-		redirect('/users/carts');
+		echo 'success';
+		// if res == success then stripe;
 	}
 
 	public function history(){

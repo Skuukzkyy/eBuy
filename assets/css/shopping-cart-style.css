@@ -142,9 +142,13 @@ button#update {
 }
 
 form#checkout{
+    padding-bottom: 30px;
     background-color: #fafafa;
     box-shadow: 2px 6px 21px -4px rgba(125,124,125,0.68);    
 }
+    form#checkout input{
+        height: 30px;
+    }
 
 body > form {
     margin-bottom: 50px;
@@ -161,8 +165,8 @@ body > form {
     body > form label {
         text-align: right;
     }
-    body > form input[type='submit'] {
-        margin: 20px 0 0 462px;
+    button#pay_button {
+        margin: 50px 0 0 462px;
         background: rgb(78,141,132);
         color: rgba(0, 0, 0, 0.822);
         background: linear-gradient(0deg, rgba(78,141,132,0.9580707282913166) 43%, rgba(193,224,207,1) 93%);        padding: 3px 5px;

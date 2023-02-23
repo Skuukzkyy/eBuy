@@ -9,19 +9,19 @@
         <link href = "https://code.jquery.com/ui/1.10.4/themes/overcast/jquery-ui.css" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://checkout.stripe.com/checkout.js"></script>
         <link rel="stylesheet" href="/assets/css/shopping-cart-style.css"/>
         <link rel="stylesheet" href="/assets/css/header.css"/>
         <script src="/assets/js/cart_page.js"></script>
     </head>
     <body>
-        <a href="/users/history">View Order History</a>
         <div class="loader-dialog">
                 <img src="/assets/img/ajax-loader.gif"/>
         </div>
 
         <div class="error"><?= $this->session->flashdata('error_message') ?></div>
         <div class="success"><?= $this->session->flashdata('success_message') ?></div>
-        
+        <a href="/users/history">View Order History</a>
         <section id="cart_items_table">
 
         </section>
@@ -73,16 +73,8 @@
 
             <label for="zipcode">Zipcode:</label>
             <input type="text" name="billing_zipcode" value="<?= (empty($billing_address['zip_code'])) ? '' : $billing_address['zip_code'] ?>">
-            
-            <label for="card">Card:</label>
-            <input type="text" name="billing_card">
-            <label for="security_code">Card Security Code:</label>
-            <input type="text" name="security_code">
 
-            <label for="expiration">Card Expiration:</label>
-            <input type="month" name="expiration">
-
-            <input type="submit" id="pay_button" value="Pay">
+            <button id="pay_button">Pay</button>
         </form>
 
     </body>

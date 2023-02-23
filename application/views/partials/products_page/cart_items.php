@@ -23,7 +23,7 @@
                         <td>₱<?= $item['product_price'] ?></td>
                         <td>
                             <form id="update_cart" action="/users/update_cart_quantity" method="POST">
-                                <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
+                                <input type="hidden" class="csrf" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
                                 <input type="hidden" name="product_id" value="<?= $item['product_id'] ?>">
                                 <input class="cart_item_quantity" name="quantity" type="number" min="1" value="<?= $item['quantity'] ?>"/> 
                                 <img class="remove_from_cart" data-product-name="<?= $item['product_name'] ?>" data-product-id="<?= $item['product_id'] ?>" src="/assets/img/trash-can.png"/>
@@ -34,6 +34,7 @@
 <?php
     }
 ?>
+                <input type="hidden" id="total_cost" value="<?= $total ?>">
                 </tbody>
             </table>
             <p>Total: ₱<?= $total ?></p>

@@ -25,8 +25,53 @@ $(document).ready(function() {
         }
     });
 
+    // checkout forrm submit
+    $(document).on('click', '#pay_button', function(){
+        var total_cost = $('#total_cost').val();
+        $.post('/users/checkout', $('form#checkout').serialize(), function(res){
+            if(res == 'success'){
+                pay(total_cost);
+                console.log(res);
+            }else{
+                console.log(res)
+                location.reload();
+            }
+        });
+        return false;
+    });
+
     load_cart_items();
 });
+
+function pay(amount) {
+    var handler = StripeCheckout.configure({
+        key: 'pk_test_51MeZJdEYWVYzumRAbGPnXNmkn1J1cdlXJqtIpQd37UbcPwMdA5GsBkxN3BS3hVJa9F9DbzT9TKuRZhR9KlT6gwpZ00KpJjJHYt', // your publisher key id
+        locale: 'auto',
+        token: function (token) {
+        // You can access the token ID with `token.id`.
+        // Get the token ID to your server-side code for use.
+            console.log('Token Created!!');
+            console.log(token)
+            var csrfName = $('.csrf').attr('name'); // Value specified in $config['csrf_token_name']
+            var csrfHash = $('.csrf').val(); // CSRF hash
+            $('#token_response').html(JSON.stringify(token));
+            $.ajax({
+                url:"/stripe/payment",
+                method: 'post',
+                data: { tokenId: token.id, amount: amount, [csrfName]: csrfHash },
+                dataType: "json",
+                success: function( response ) {
+                    location.reload();
+                }
+            })
+        }
+    });
+    handler.open({
+        name: 'Payment for order',
+        description: 'Total: ₱'+amount,
+        amount: 'PAY'
+    });
+}
 
 function load_cart_items(){
     $.get('/users/load_cart_items', function(res){
