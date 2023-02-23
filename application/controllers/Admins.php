@@ -43,10 +43,6 @@ class Admins extends CI_Controller {
         echo json_encode($response);
     }
 
-    public function product_preview(){
-        $this->load->view('/products/product_preview');
-    }
-
     public function update_category(){
         $form_data = $this->input->get(NULL, TRUE);
         $this->Category->update($form_data);
@@ -117,8 +113,21 @@ class Admins extends CI_Controller {
         }
     }
 
+    public function show_preview(){
+        $data['product_details'] = $this->session->userdata('form_data');
+        $this->load->view('/admins/add_preview', $data);
+    }
+
+    public function add_preview(){
+        $form_data = $this->input->post(NULL, TRUE);
+        $this->session->set_userdata('form_data', $form_data);
+    }
+
     public function create(){
         $form_data = $this->input->post(NULL, TRUE);
+        var_dump($form_data);
+        var_dump($_FILES);
+        die();
         $result = $this->Product->validate();
         if($result == 'success'){
 

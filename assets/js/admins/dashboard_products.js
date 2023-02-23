@@ -205,8 +205,47 @@ $(document).ready(function(){
         $(".form-dialog").dialog("close");
     });
     //Preview in product modal
-    $(document).on('click', "button#preview", function(){
-        window.open('/admins/product_preview', '_blank');
+    $(document).on('click', "button#update_preview", function(){
+        var product_id = $(this).siblings('#product_id').val()
+        window.open('/products/show/' +product_id, '_blank');
+    });
+
+    $(document).on('click', "button#add_preview", function(){
+
+        var form_data = $(this).parent().serialize();
+
+        $.post('/admins/add_preview', form_data, function(res){
+            window.open('/admins/show_preview/', '_blank');
+        });
+        // console.log($(this).parent().serializeArray());
+        // var input_file = $('#add_product_images');
+        // var files = input_file[0].files;
+        // // console.log(files);
+
+        // var form_data = new FormData();
+        // form_data.append('csrf_test_name', $('#csrf').val());
+        // form_data.append('inputs', $(this).parent().serializeArray());
+        // if (files[0] != undefined){
+        //     for (var i = 0; i < files.length; i++) {
+        //         var image = files[i];
+        //         form_data.append("images[]", image);
+        //     }
+        // }
+        
+        // $.ajax({
+        //     type: "POST",
+        //     url: '/admins/add_preview/',
+        //     data: form_data,
+        //     processData: false,
+        //     contentType: false,     
+        //     cache: false,
+        //     success: function (res){
+        //         console.log(res)
+        //     }
+        // });
+
+        // console.log(form_data);
+
     });
 
     //Product or Category delete

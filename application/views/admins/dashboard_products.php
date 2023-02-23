@@ -28,7 +28,7 @@
                 <img src="/assets/img/ajax-loader.gif"/>
             </div>
             <form action="/admins/create" method="POST" id="add_new_product" enctype="multipart/form-data">
-                <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
+                <input type="hidden" id="csrf" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
                 <label for="name">Name:</label>
                 <input type="text" name="name"/>
         
@@ -54,7 +54,7 @@
                 <ul></ul>
 
                 <button type="button" id="cancel">Cancel</button>
-                <button type="button" id="preview">Preview</button>
+                <button type="button" id="add_preview">Preview</button>
                 <input type="submit" value="Add"/>
             </form>
         </div>

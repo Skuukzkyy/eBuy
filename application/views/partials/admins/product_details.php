@@ -61,6 +61,6 @@
 ?>
                 </ul>
                 <button type="button" id="cancel">Cancel</button>
-                <button type="button" id="preview">Preview</button>
+                <button type="button" id="update_preview">Preview</button>
                 <input type="submit" value="Update"/>
             </form>
