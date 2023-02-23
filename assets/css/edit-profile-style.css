@@ -57,6 +57,14 @@ body header + a {
         border: 2px solid lightgray;
         background-color: rgb(245, 245, 245);
     }
+        fieldset a{
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            color: black;
+            border: 2px solid black;
+            background: linear-gradient(0deg, rgba(78,141,132,0.9580707282913166) 43%, rgba(193,224,207,1) 93%);        padding: 3px 5px;
+        }
         fieldset legend {
             padding: 0 2px;
             margin: 0 auto;
