@@ -153,7 +153,9 @@ class Users extends CI_Controller {
 			return FALSE;
 		}
 		$sub_total = 0;
+		$products_list = array();
 		foreach($cart_items as $cart_item){
+			$products_list[] = $cart_item['product_name']. ' (' .$cart_item['quantity']. ')';
 			$sub_total += $cart_item['product_price'] * $cart_item['quantity'];
 			$ordered_products['ordered_products'][] = array(
 				"product_id" => $cart_item['product_id'],
@@ -190,6 +192,7 @@ class Users extends CI_Controller {
 		$this->session->set_flashdata('success_message', 'Ordered Successfully.');
 		$this->Order->new($user_id, $json_ordered_prodducts, $json_shipping_address, $json_billing_address, $sub_total);
 		$this->Cart->delete_all($user_id);
+		$this->send_email($products_list, $sub_total);
 		echo 'success';
 		// if res == success then stripe;
 	}
@@ -205,6 +208,53 @@ class Users extends CI_Controller {
 	public function update_header(){
 		$data['cart_count']  = $this->Cart->count();
 		$this->load->view('/partials/header', $data);
+	}
+
+	public function send_email($products_list, $sub_total){
+		$products_string = '';
+		foreach($products_list as $product){
+			$products_string .= $product. ' ';
+		}
+		$this->load->library('phpmailer_lib');
+		// PHPMailer object
+		$mail = $this->phpmailer_lib->load();
+		try {
+			//Server settings
+			$mail->SMTPDebug = 0;                      //Enable verbose debug output
+			$mail->isSMTP();                                            //Send using SMTP
+			$mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+			$mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+			$mail->Username   = 'movie.tastic69@gmail.com';                     //SMTP username
+			$mail->Password   = 'mvtuhmbdywpiivjt';                               //SMTP password
+			$mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
+			$mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+			//sender
+			$mail->setFrom('movie.tastic69@gmail.com', 'Movie Tastic');
+			// recepient
+			$mail->addAddress('arlanticojerick09@gmail.com');               
+			$mail->addReplyTo('movie.tastic69@gmail.com');
+
+			//Attachments
+			// $mail->AddEmbeddedImage('img/'.$banner1.'', 'movie_banner');
+			// $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+			// $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+			//Content
+			$mail->isHTML(true);                                  //Set email format to HTML
+			$mail->Subject = 'Order Receipt';
+			$mail->Body    = '
+				THANK YOU FOR BUYING ON <strong>eBuy</strong>!<br>
+				Here are the items you bought:<br>
+				'.$products_string.'<br>
+				<strong>Shipping Fee: 50</strong><br>
+				<strong>Sub Total: ' .$sub_total. '</strong><br>
+				<strong>Total Cost: ' .($sub_total + 50). '</strong>';
+
+			$mail->send();
+			// header("Location: index.php");
+		} catch (Exception $e){
+		}
 	}
 
 }

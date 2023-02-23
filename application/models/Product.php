@@ -33,7 +33,7 @@ class Product extends CI_Model {
         return $this->db->query("SELECT MAX(id) as max_id FROM products")->row_array();
     }
 
-    function get_by_category($search_keyword, $order_by){
+    function search($search_keyword, $order_by){
         $query = "SELECT * FROM products WHERE name LIKE ?";
         $values = array("%$search_keyword%");
         
@@ -42,7 +42,7 @@ class Product extends CI_Model {
             $values[] = $this->session->userdata('current_category_id');
         }
 
-        $query .= " ORDER BY $order_by DESC";
+        $query .= " ORDER BY $order_by";
         // $query = "SELECT * FROM products WHERE category_id = ? AND name LIKE ? ORDER BY $order_by DESC"; 
         return $this->db->query($query, $values)->result_array();
     }

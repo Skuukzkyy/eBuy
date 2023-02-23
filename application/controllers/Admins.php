@@ -128,7 +128,6 @@ class Admins extends CI_Controller {
         $form_data = $this->input->post(NULL, TRUE);
         var_dump($form_data);
         var_dump($_FILES);
-        die();
         $result = $this->Product->validate();
         if($result == 'success'){
 

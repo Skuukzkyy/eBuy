@@ -41,8 +41,9 @@
             <form action="/products/load_products" method="POST" id="sort">
                 <label for="sorted_by">Sorted by</label>
                 <select name="sorted_by" id="sorted_by">
-                    <option value="price" selected>Price</option>
-                    <option value="quantity_sold">Most Popular</option>
+                    <option value="price desc">Price (high to low)</option>
+                    <option value="price asc">Price (low to high)</option>
+                    <option value="quantity_sold desc" selected>Most Popular</option>
                 </select>
             </form>
             <!-- Display Products -->

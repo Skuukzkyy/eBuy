@@ -22,5 +22,6 @@ header {
         margin-top:-4px;
     }
     header a {
+        color: white !important;
         float: right;
     }
