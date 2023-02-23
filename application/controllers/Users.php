@@ -132,6 +132,7 @@ class Users extends CI_Controller {
 	}
 
 	public function checkout(){
+		// need validation sa mga fields billing/shipping required sila 
 		$user_id = $this->session->userdata('user_id');
 		echo $user_id;
 		var_dump($this->input->post(NULL, TRUE));

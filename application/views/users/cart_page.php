@@ -17,7 +17,6 @@
         <div class="loader-dialog">
                 <img src="/assets/img/ajax-loader.gif"/>
         </div>
-        <a href="#">View Order History</a>
         
         <section id="cart_items_table">
 
