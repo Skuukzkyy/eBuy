@@ -126,8 +126,8 @@ class Admins extends CI_Controller {
 
     public function create(){
         $form_data = $this->input->post(NULL, TRUE);
-        var_dump($form_data);
-        var_dump($_FILES);
+        // var_dump($form_data);
+        // var_dump($_FILES);
         $result = $this->Product->validate();
         if($result == 'success'){
 

@@ -8,7 +8,7 @@
                 <tr>
                     <td><img src="/assets/img/products/<?= $products[$i]['id'] ?>/<?= $images->main ?>"></td>
                     <td><?= $products[$i]['id'] ?></td>
-                    <td><?= $products[$i]['name'] ?></td>
+                    <td class="product_name"><?= $products[$i]['name'] ?></td>
                     <td><?= $products[$i]['inventory_count'] ?></td>
                     <td><?= $products[$i]['quantity_sold'] ?></td>
                     <td> 

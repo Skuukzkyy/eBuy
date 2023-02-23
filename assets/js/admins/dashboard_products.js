@@ -80,7 +80,7 @@ $(document).ready(function(){
                 $('form#search').submit();
             })
             .fail(function(error){
-                $('div.error').text('Cannot delete category that basta may benta pa sa category na ito');
+                $('div.error').text('Cannot delete category that has products on sale under it.');
             });
         }
         

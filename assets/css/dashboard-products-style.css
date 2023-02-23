@@ -256,6 +256,9 @@ table {
         text-align: left;
         padding: 5px;
     }
+    td.product_name{
+        width: 400px;
+    }
     tr:nth-child(even) {
         background-color: #f2f2f2;
     }
