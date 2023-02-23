@@ -17,6 +17,9 @@
         <div class="loader-dialog">
                 <img src="/assets/img/ajax-loader.gif"/>
         </div>
+
+        <div class="error"><?= $this->session->flashdata('error_message') ?></div>
+        <div class="success"><?= $this->session->flashdata('success_message') ?></div>
         
         <section id="cart_items_table">
 

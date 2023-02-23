@@ -17,6 +17,26 @@
     left:50%;
     top: 15%;
 }
+.error {
+    width: 100%;
+    text-align: center;
+    background-color: red;
+    margin: 0 auto;
+}
+    .error p {
+        color: white;
+        text-align: center;
+    }    
+.success {
+    width: 100%;
+    text-align: center;
+    background-color: green;
+    margin: 0 auto;
+}
+    .success p {
+        color: white;
+        text-align: center;
+    } 
 div#image-preview-dialog img {
     width: 400px;
 }

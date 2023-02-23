@@ -36,4 +36,77 @@ class Order extends CI_Model {
         $this->db->query($query, $values);
     }
 
+    function validate(){
+        // VALIDATION DIN SA CARD 
+        $config = array(
+            array(
+                'field' => 'shipping_first_name',
+                'label' => 'Shipping First Name',
+                'rules' => 'required',
+            ),
+            array(
+                'field' => 'shipping_last_name',
+                'label' => 'Shipping Last Name',
+                'rules' => 'required',
+            ),
+            array(
+                'field' => 'shipping_address1',
+                'label' => 'Shipping Address',
+                'rules' => 'required',
+            ),
+            array(
+                'field' => 'shipping_city',
+                'label' => 'Shipping City',
+                'rules' => 'required',
+            ),
+            array(
+                'field' => 'shipping_state',
+                'label' => 'Shipping State',
+                'rules' => 'required',
+            ),
+            array(
+                'field' => 'shipping_zipcode',
+                'label' => 'Shipping Zip Code',
+                'rules' => 'required|numeric',
+            ),
+            array(
+                'field' => 'billing_first_name',
+                'label' => 'Billing First Name',
+                'rules' => 'required',
+            ),
+            array(
+                'field' => 'billing_last_name',
+                'label' => 'Billing Last Name',
+                'rules' => 'required',
+            ),
+            array(
+                'field' => 'billing_address1',
+                'label' => 'Billing Address',
+                'rules' => 'required',
+            ),
+            array(
+                'field' => 'billing_city',
+                'label' => 'Billing City',
+                'rules' => 'required',
+            ),
+            array(
+                'field' => 'billing_state',
+                'label' => 'Billing State',
+                'rules' => 'required',
+            ),
+            array(
+                'field' => 'billing_zipcode',
+                'label' => 'Billing Zip Code',
+                'rules' => 'required|numeric',
+            ),
+        );
+
+        $this->form_validation->set_rules($config);
+        if($this->form_validation->run() === FALSE){
+            return validation_errors();
+        }else{
+            return 'success';
+        }
+    }
+
 }

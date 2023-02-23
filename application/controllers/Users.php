@@ -132,11 +132,16 @@ class Users extends CI_Controller {
 	}
 
 	public function checkout(){
-		// need validation sa mga fields billing/shipping required sila 
-		$user_id = $this->session->userdata('user_id');
-		echo $user_id;
-		var_dump($this->input->post(NULL, TRUE));
 		$form_data = $this->input->post(NULL, TRUE);
+		$validate = $this->Order->validate();
+		if($validate != 'success'){
+			$this->session->set_flashdata('error_message', $validate);
+			redirect('/users/carts');
+		}
+		$user_id = $this->session->userdata('user_id');
+		var_dump($this->input->post(NULL, TRUE));
+
+		$this->Order->validate();
 		$cart_items = $this->Cart->get_all($user_id);
 		$sub_total = 0;
 		foreach($cart_items as $cart_item){
