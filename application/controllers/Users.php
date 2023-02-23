@@ -105,6 +105,9 @@ class Users extends CI_Controller {
 	}
 	
     public function carts(){
+		if($this->session->userdata('user_id') == null){
+			redirect('/');
+		}
 		$data['cart_count']  = $this->Cart->count();
 		$data['shipping_address'] = $this->User->get_shipping($this->session->userdata('user_id'));
 		$data['billing_address'] = $this->User->get_billing($this->session->userdata('user_id'));
@@ -190,9 +193,11 @@ class Users extends CI_Controller {
 	}
 
 	public function history(){
+		$user_id = $this->session->userdata('user_id');
 		$data['cart_count']  = $this->Cart->count();
+		$data['user_orders'] = $this->Order->get_by_user_id($user_id);
 		$this->load->view('/partials/header', $data);
-        $this->load->view('/users/order_history.php');
+        $this->load->view('/users/order_history.php', $data);
 	}
 
 	public function update_header(){

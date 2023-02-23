@@ -14,6 +14,7 @@
         <script src="/assets/js/cart_page.js"></script>
     </head>
     <body>
+        <a href="/users/history">View Order History</a>
         <div class="loader-dialog">
                 <img src="/assets/img/ajax-loader.gif"/>
         </div>

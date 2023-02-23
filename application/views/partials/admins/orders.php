@@ -11,7 +11,7 @@
 <?php                
                     $billing_address = json_decode($orders[$i]['billing_address'], TRUE);
 ?>
-                    <td><?= $billing_address['billing_address']['address'] ?></td>
+                    <td><?= $billing_address['billing_address']['address']. ' ' .$billing_address['billing_address']['city'] ?></td>
                     <td>₱<?= $orders[$i]['total_cost'] ?></td>
                     <td>
                         <select title="<?= $orders[$i]['id'] ?>" name="status" id="status" <?= ($orders[$i]['status'] == 2 || $orders[$i]['status'] == 0) ? "disabled" : "" ?>>

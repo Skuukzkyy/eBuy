@@ -11,6 +11,15 @@ class Order extends CI_Model {
         return $this->db->query("SELECT * FROM orders WHERE id = ?", array($order_id))->row_array();
     }
 
+    function get_by_user_id($user_id){
+        $query = "SELECT orders.*, users.first_name, users.last_name 
+            FROM orders INNER JOIN users ON users.id = orders.user_id 
+            WHERE user_id = ?
+            ORDER BY orders.id DESC
+        ";
+        return $this->db->query($query, array($user_id))->result_array();
+    }
+
     function update_order_status($order_id, $status){
         $this->db->query("UPDATE orders SET status = ? WHERE id =?", array($status, $order_id));
     }

@@ -57,7 +57,6 @@ h1 {
     }    
 nav {
     position: relative;
-    top: 20px;
 }
     nav div {
         width: 200px;
@@ -241,6 +240,7 @@ div.form-dialog form {
 
 
 table {
+    width: 60%;
     border-collapse: collapse;
     margin: 0 auto 10px auto;
     background-color: rgb(245, 245, 245);
@@ -258,7 +258,7 @@ table {
     td, th {
         border: 1px solid gray;
         text-align: left;
-        padding: 7px;
+        padding: 5px;
     }
     tr:nth-child(even) {
         background-color: #f2f2f2;

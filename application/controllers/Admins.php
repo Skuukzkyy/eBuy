@@ -8,6 +8,7 @@ class Admins extends CI_Controller {
 		$this->load->model('Product');
 		$this->load->model('Category');
 		$this->load->model('Order');
+		$this->load->model('Cart');
 	}
 
     public function index(){
@@ -196,11 +197,9 @@ class Admins extends CI_Controller {
     }
 
     public function orders_show($order_id){
-        if(!$this->session->userdata('is_admin')){
-            redirect('/users/login');
-        }
+		$data['cart_count']  = $this->Cart->count();
         $data['order_details'] = $this->Order->get_by_id($order_id);
-        $this->load->view('/partials/header');
+        $this->load->view('/partials/header', $data);
         $this->load->view('/admins/order_details', $data);
     }
 

@@ -1,3 +1,6 @@
+<?php
+    $status = array(0 => 'Cancelled', 1 => 'Order In Progress', 2 => 'Success');
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -22,22 +25,25 @@
                 </tr>                
             </thead>
             <tbody>
+<?php
+    foreach($user_orders as $user_order){
+        $billing_address = json_decode($user_order['billing_address']);
+        $billing_address = $billing_address->billing_address;
+        $shipping_address = json_decode($user_order['shipping_address']);
+        $shipping_address = $shipping_address->shipping_address;
+?>
                 <tr>
-                    <td><a href="./order_history_details.html">101</a></td>
-                    <td>Marlon</td>
-                    <td>9/12/2020</td>
-                    <td>456 Steve Street, Marikina City</td>
-                    <td>$10.00</td>
-                    <td>Cancelled</td>
+                    <td><a href="/orders/show/<?= $user_order['id'] ?>"><?= $user_order['id'] ?></a></td>
+                    <td><?= $shipping_address->name ?></td>
+                    <td><?= date('m/d/Y', strtotime($user_order['created_at'])) ?></td>
+
+                    <td><?= $billing_address->address. ' ' .$billing_address->city?></td>
+                    <td>₱<?= $user_order['total_cost'] ?></td>
+                    <td><?= $status[$user_order['status']] ?></td>
                 </tr>
-                <tr>
-                    <td><a href="./order_history_details.html">100</a></td>
-                    <td>Karen</td>
-                    <td>8/27/2020</td>
-                    <td>123 Commmonwealth, Quezon City</td>
-                    <td>$15.00</td>
-                    <td>Shipped</td>
-                </tr>
+<?php
+    }
+?>
             </tbody>
         </table>
     </body>
