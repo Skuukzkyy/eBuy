@@ -1,21 +1,24 @@
 <?php
-    foreach($orders as $order){
+    for ($i = ($page_number - 1) * 10; $i < $page_number * 10; $i++){
+        if($i >= count($orders)){
+            break;
+        }
 ?>
                 <tr>
-                    <td><a href="/orders/show/<?= $order['id'] ?>"><?= $order['id'] ?></a></td>
-                    <td><?= $order['first_name']. ' ' .$order['last_name'] ?></td>
-                    <td><?= date('m/d/Y', strtotime($order['created_at'])) ?></td>
+                    <td><a href="/orders/show/<?= $orders[$i]['id'] ?>"><?= $orders[$i]['id'] ?></a></td>
+                    <td><?= $orders[$i]['first_name']. ' ' .$orders[$i]['last_name'] ?></td>
+                    <td><?= date('m/d/Y', strtotime($orders[$i]['created_at'])) ?></td>
 <?php                
-                    $billing_address = json_decode($order['billing_address'], TRUE);
+                    $billing_address = json_decode($orders[$i]['billing_address'], TRUE);
 ?>
                     <td><?= $billing_address['billing_address']['address'] ?></td>
-                    <td>₱<?= $order['total_cost'] ?></td>
+                    <td>₱<?= $orders[$i]['total_cost'] ?></td>
                     <td>
-                        <select title="<?= $order['id'] ?>" name="status" id="status" <?= ($order['status'] == 2 || $order['status'] == 0) ? "disabled" : "" ?>>
+                        <select title="<?= $orders[$i]['id'] ?>" name="status" id="status" <?= ($orders[$i]['status'] == 2 || $orders[$i]['status'] == 0) ? "disabled" : "" ?>>
                         <!-- bawal na ibahin pag cancelled na or sihpped -->
-                            <option value="1" <?= ($order['status'] == 1) ? "selected disabled" : "" ?>>Order in process</option>
-                            <option value="2" <?= ($order['status'] == 2) ? "selected disabled" : "" ?>>Shipped</option>
-                            <option value="0" <?= ($order['status'] == 0) ? "selected disabled" : "" ?>>Cancelled</option>
+                            <option value="1" <?= ($orders[$i]['status'] == 1) ? "selected disabled" : "" ?>>Order in process</option>
+                            <option value="2" <?= ($orders[$i]['status'] == 2) ? "selected disabled" : "" ?>>Shipped</option>
+                            <option value="0" <?= ($orders[$i]['status'] == 0) ? "selected disabled" : "" ?>>Cancelled</option>
                         </select>
                     </td>
                 </tr>

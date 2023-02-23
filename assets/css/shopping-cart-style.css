@@ -18,6 +18,7 @@
     top: 15%;
 }
 .error {
+    color: white;
     width: 100%;
     text-align: center;
     background-color: red;
@@ -28,6 +29,7 @@
         text-align: center;
     }    
 .success {
+    color: white;
     width: 100%;
     text-align: center;
     background-color: green;

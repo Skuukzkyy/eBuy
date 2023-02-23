@@ -15,6 +15,7 @@
             <div>
                 <img src='/assets/img/magnifying_glass.png' />
                 <input type="search" name="search_keyword" id="search_keyword" placeholder="search">
+                <input type="hidden" name="page_number" id="page_number" value="1">
             </div>
             <select id="filter" name="filter">
                 <option value="*" selected>Show All</option>
@@ -39,12 +40,6 @@
             </tbody>
         </table>
         <footer>
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">&#8594;</a>
         </footer>
     </body>
 </html>

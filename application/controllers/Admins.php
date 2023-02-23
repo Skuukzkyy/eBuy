@@ -214,9 +214,13 @@ class Admins extends CI_Controller {
         // $this->output->enable_profiler(TRUE);
         $status = $this->input->get('status', TRUE);
         $search_keyword = $this->input->get('search_keyword', TRUE);
+        $data['page_number'] = $this->input->get('page_number', TRUE);
+        // echo $this->input->get('page_number', TRUE);
         $data['orders'] = $this->Order->search($search_keyword, $status);
         // var_dump($data['orders']);
-        $this->load->view('/partials/admins/orders', $data);
+        $response['orders'] = $this->load->view('/partials/admins/orders', $data, TRUE);
+        $response['footer'] = $this->load->view('/partials/admins/orders_footer', $data, TRUE);
+        echo json_encode($response);
     }
 
     public function is_valid_image($uploaded_images){

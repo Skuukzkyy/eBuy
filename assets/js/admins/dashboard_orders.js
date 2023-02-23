@@ -14,13 +14,24 @@ $(document).ready(function () {
         }
     });
 
+    // pagination
+    $(document).on('click', 'footer a', function(){
+        $('#page_number').val($(this).attr('href'));
+        console.log($('#page_number').val())
+        load_orders();
+        return false;
+    });
+
     $(document).on('keyup', 'input#search_keyword', function(){
         load_orders();
     });
 });
 
 function load_orders(){
-    $.get('/admins/filter_order', {search_keyword: $('input#search_keyword').val(),status: $('select#filter').find(":selected").val()}, function(res){
-        $('tbody').html(res);
+    $.get('/admins/filter_order', {search_keyword: $('input#search_keyword').val(),status: $('select#filter').find(":selected").val(), page_number: $('#page_number').val()}, function(res){
+        var response = JSON.parse(res);
+        console.log(response)
+        $('tbody').html(response.orders);
+        $('footer').html(response.footer);
     });
 }
