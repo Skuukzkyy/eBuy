@@ -8,9 +8,9 @@
                     <a href="/products/show/<?= $products[$i]['id'] ?>">
 <?php                   $images = json_decode($products[$i]['images']); ?>
                         <img src="/assets/img/products/<?= $products[$i]['id'] ?>/<?= $images->main ?>"/>
-                        <p><?= $products[$i]['price'] ?></p>
-                        <figcaption><?= $products[$i]['name'] ?></figcaption>
                     </a>
+                    <figcaption><p><?= $products[$i]['name'] ?></p></figcaption>
+                    <p class="price">₱<?= $products[$i]['price'] ?></p>
                 </figure>
 <?php
             }

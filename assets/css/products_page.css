@@ -105,31 +105,39 @@ main {
             main section figure a img:hover {
                 border: 1px solid gray;
             }
-        main section figure a p {
+        main section figure p.price {
             width: 100px;
-            height: 20px;
-            position: absolute;
-            bottom: 22px;
-            padding-right:5px;
+            /* height: 20px; */
             background-color:rgba(147, 175, 46, 0.65);
-            text-align: right;
+            /* position: absolute; */
+            /* bottom: 22px; */
+            padding:2px;
+            text-align: center;
             border: 1px solid lightgray;            
             border-top: none;
             color:#000000cf;
         }
-        main section figure a figcaption {
-            overflow: hidden;
-            text-overflow: ellipsis; 
-            white-space: nowrap;
+        main section figure figcaption {
+            background-color: rgba(236, 236, 236, 0.911);
+            display: flex;
+            overflow: hidden;  /* prevents extra lines from being visible */
+            line-height: 1.5em;
+            height: 3em;
         }
-    main footer {        
+        main section figure figcaption p{
+            color: black;
+            margin: auto;
+        }
+    main footer {    
         margin: 40px 0 1px 0;
+        padding: 10px 0;
         text-align: center;
     }
         main footer a {
-            border-right: 1px solid black;
-            padding: 3px;
-        }
-        main footer a:last-child {
-            border-right: none;
+            text-decoration: none;
+            display: inline-block;
+            color: white;
+            background-color: blue;
+            padding: 10px 0;
+            width: 40px;
         }
