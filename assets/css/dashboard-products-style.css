@@ -20,19 +20,15 @@
     top: 15%;
 }
 body {
-    background-color: #e2e2e2;
+    background-color: white;
     font-family: Helvetica;
+    color: rgba(0, 0, 0, 0.87);
 }    
-    body * {
-        color: #675c67;
-    }
-    body header a, body header h2 {
+    body header h2 {
         color: rgba(135, 165, 179, 0.945);
     }
-    body a:hover {
-        color: #8cc474;
-    }
 h1 {
+    margin: 10px 0;
     text-align: center;
 }     
 .error {
@@ -277,9 +273,18 @@ footer {
     text-align: center;
 }
     footer a {
-        border-right: 1px solid black;
-        padding: 3px;
+        text-decoration: none;
+        display: inline-block;
+        color: black;
+        background-color: rgba(168, 168, 168, 0.308);
+        padding: 10px 0;
+        width: 40px;
     }
     footer a:last-child {
         border-right: none;
     }
+    footer a:hover{
+        background-color: white;
+    }
+
+    

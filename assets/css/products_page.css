@@ -2,15 +2,15 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-    color: #675c67;
+    color: black;
 }
 body {
-    background-color: #e2e2e2;
+    background-color: white;
     font-family: Helvetica;
     color: rgba(0, 0, 0, 0.87);
 }    
 body a:hover {
-    color:#8cc474;
+    color:red;
 }
 body > form {
     border: 2px solid lightgray;
@@ -20,7 +20,7 @@ body > form {
     margin: 20px 40px;
     display: inline-block;
     vertical-align: top;
-    background-color: white;
+    background-color: rgba(168, 168, 168, 0.308);
 }
     form div {
         width: 200px;
@@ -54,11 +54,11 @@ body > form {
         font-size: 12px;
     }
     form ul li a {
-        text-decoration: none;
+        font-size: 1.2rem;
     }
 main {
     width: 70%;    
-    background-color: rgb(245, 245, 245);
+    background-color: rgba(168, 168, 168, 0.308);
     box-shadow: 2px 6px 21px -4px rgba(125,124,125,0.68);    
     position: relative;
     padding: 18px;
@@ -136,8 +136,8 @@ main {
         main footer a {
             text-decoration: none;
             display: inline-block;
-            color: white;
-            background-color: blue;
+            color: black;
+            background-color: white;
             padding: 10px 0;
             width: 40px;
         }

@@ -1,6 +1,6 @@
 <div id="header">
 	<header>
-        <a href="/products">eBuy</a>
+        <a href="/products" id="shop_name">eBuy</a>
 <?php
 	if($this->session->userdata('user_id') != null){
 ?>

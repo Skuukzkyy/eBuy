@@ -37,7 +37,7 @@ div[role="dialog"] button  {
 body {
     background-color: rgb(245, 245, 245);
     font-family: Helvetica;
-    color: #675c67;
+    color: black;
 }        
     body a:hover {
         color:#8cc474;

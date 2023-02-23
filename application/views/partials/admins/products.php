@@ -1,5 +1,5 @@
 <?php
-    for ($i = ($page_number - 1) * 10; $i < $page_number * 10; $i++) { 
+    for ($i = ($page_number - 1) * 9; $i < $page_number * 9; $i++) { 
         if($i >= count($products)){
             break;
         }
