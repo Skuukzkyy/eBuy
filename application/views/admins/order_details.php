@@ -18,7 +18,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="E-commerce Capstone Project">
-        <meta name="author" content="Karen Marie E. Igcasan">
+        <meta name="author" content="Jerick Arlantico">
         <link rel="stylesheet" href="/assets/css/order-details-style.css"/>
         <link rel="stylesheet" href="/assets/css/header.css"/>
     </head>

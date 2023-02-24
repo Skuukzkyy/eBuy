@@ -61,7 +61,7 @@
 
                 <input type="submit" message="Shipping information successfully updated!" value="Save">
             </form>
-                <a href="#" id="same_as_billing">Same as billing</a>
+            <a href="#" id="same_as_billing">Same as billing</a>
         </fieldset>
         <fieldset>
             <legend>Edit Default Billing</legend>

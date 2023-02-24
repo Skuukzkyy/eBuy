@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name="description" content="E-commerce Capstone Project">
+        <meta name="author" content="Karen Marie E. Igcasan">
+        <link rel="stylesheet" href="css/products_page.css"/>
+        <link rel="stylesheet" href="css/header.css"/>
+        <script src="./js/products_page.js"></script>
+    </head>
+    <body>
+        <header>
+            <a href="./catalog.html">eBuy</a>
+            <a href="./login.html">Login</a>
+            <a href="./edit_profile.html">Settings</a>
+            <a href="./shopping_cart.html">Shopping Cart (0)</a>
+        </header>  
+        <form action="./search-keyword.html" method="POST" id="search">
+            <div>
+                <img src='./img/magnifying_glass.png' />
+                <input type="search" name="search_keyword" placeholder="search">
+            </div>
+            <ul>
+                <strong>Categories</strong>
+                <li><a href="#">Tshirts (25)</a></li>
+                <li><a href="#">Cups (25)</a></li>
+                <li><a href="#">Fruits (25)</a></li>
+                <li><a href="#">Show All</a></li>
+            </ul>
+        </form>
+        <main>
+            <h2 class="title">All Product <span>(page 1)</span></h2>
+            <nav>
+                <a href="#">first</a>
+                <a href="#">prev</a>
+                <span>2</span>
+                <a href="#">next</a>
+            </nav>
+            <form action="#" id="sort">
+                <label for="sorted_by">Sorted by</label>
+                <select name="sorted_by">
+                    <option value="price" selected>Price</option>
+                    <option value="most_popular">Most Popular</option>
+                </select>
+            </form>
+            <!-- Display Products -->
+            <section id="products">
+                <figure>
+                    <a href="./product_details.html">
+                        <img src="./img/magnifying_glass.png"/>
+                        <p>$1.99</p>
+                        <figcaption>Magnifying Glass</figcaption>
+                    </a>
+                </figure>
+                <figure>
+                    <a href="#">
+                        <img src="./img/magnifying_glass.png"/>
+                        <p>$1.99</p>
+                        <figcaption>Magnifying Glass</figcaption>
+                    </a>
+                </figure><figure>
+                    <a href="./product_details.html">
+                        <img src="./img/magnifying_glass.png"/>
+                        <p>$1.99</p>
+                        <figcaption>Magnifying Glass</figcaption>
+                    </a>
+                </figure>
+                <figure>
+                    <a href="#">
+                        <img src="./img/magnifying_glass.png"/>
+                        <p>$1.99</p>
+                        <figcaption>Magnifying Glass</figcaption>
+                    </a>
+                </figure><figure>
+                    <a href="./product_details.html">
+                        <img src="./img/magnifying_glass.png"/>
+                        <p>$1.99</p>
+                        <figcaption>Magnifying Glass</figcaption>
+                    </a>
+                </figure>
+                <figure>
+                    <a href="#">
+                        <img src="./img/magnifying_glass.png"/>
+                        <p>$1.99</p>
+                        <figcaption>Magnifying Glass</figcaption>
+                    </a>
+                </figure>
+                <figure>
+                    <a href="./product_details.html">
+                        <img src="./img/magnifying_glass.png"/>
+                        <p>$1.99</p>
+                        <figcaption>Magnifying Glass</figcaption>
+                    </a>
+                </figure>
+                <figure>
+                    <a href="#">
+                        <img src="./img/magnifying_glass.png"/>
+                        <p>$1.99</p>
+                        <figcaption>Magnifying Glass</figcaption>
+                    </a>
+                </figure>
+                <figure>
+                    <a href="#">
+                        <img src="./img/magnifying_glass.png"/>
+                        <p>$1.99</p>
+                        <figcaption>Magnifying Glass</figcaption>
+                    </a>
+                </figure>
+                <figure>
+                    <a href="#">
+                        <img src="./img/magnifying_glass.png"/>
+                        <p>$1.99</p>
+                        <figcaption>Magnifying Glass</figcaption>
+                    </a>
+                </figure>
+            </section>
+            <footer>
+                <a href="#">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">&#8594;</a>
+            </footer>
+        </main>
+    </body>
+</html>

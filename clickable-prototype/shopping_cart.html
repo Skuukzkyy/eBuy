@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name="description" content="E-commerce Capstone Project">
+        <meta name="author" content="Karen Marie E. Igcasan">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link href = "https://code.jquery.com/ui/1.10.4/themes/overcast/jquery-ui.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="js/cart_page.js"></script>
+        <link rel="stylesheet" href="css/header.css"/>
+        <link rel="stylesheet" href="css/shopping-cart-style.css"/>
+    </head>
+    <body>
+        <div class="loader-dialog">
+            <img src="img/ajax-loader.gif"/>
+        </div>
+        <header>
+            <a href="./catalog.html">eBuy</a>
+            <a href="./login.html">Login</a>
+            <a href="./edit_profile.html">Settings</a>
+            <a href="./shopping_cart.html">Shopping Cart (0)</a>
+        </header>  
+        <a href="./order_history.html">View Order History</a>
+        
+        <div id="message-dialog">Order success!</div>
+        <section>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Item</td>
+                        <td>Price</td>
+                        <td>Quantity</td>
+                        <td>Total</td>
+                    </tr>                
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Black Belt for Staff</td>
+                        <td>$19.99</td>
+                        <td><form><input class="cart_item_quantity" type="number" min="1" value="1"/> <img class="remove_from_cart" product-name="Black Belt for Staff" src="./img/trash-can.png"/></form></td>
+                        <td>$19.99</td>
+                    </tr>
+                    <tr>
+                        <td>Coding Dojo Cups</td>
+                        <td>$9.99</td>
+                        <td><form><input class="cart_item_quantity" type="number" min="1" value="2"/> <img class="remove_from_cart" product-name="Coding Dojo Cups" src="./img/trash-can.png"/></form></td>
+                        <td>$29.97</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>Total: $49.96</p>
+            <button type="button" onclick="location.href='./catalog.html';">Continue Shopping</button>
+        </section>
+        <form>
+            <h3>Shipping Information</h3>
+
+            <label for="first_name">First Name:</label>
+            <input type="text" name="first_name" />
+
+            <label for="city">City:</label>
+            <input type="text" name="city"></textarea>
+
+            <label for="last_name">Last Name:</label>
+            <input type="text" name="last_name" />
+
+            <label for="state">State:</label>
+            <input type="text" name="state">
+
+            <label for="address1">Address:</label>
+            <textarea name="address1"></textarea>
+
+            <label for="zipcode">Zipcode:</label>
+            <input type="text" name="zipcode">
+
+            <label for="address">Address 2:</label>
+            <textarea name="address2"></textarea>
+            <!----------------------------------->
+            <h3>Billing Information</h3>
+
+            <label for="first_name">First Name:</label>
+            <input type="text" name="first_name" />
+            
+            <label for="state">State:</label>
+            <input type="text" name="state">
+
+            <label for="last_name">Last Name:</label>
+            <input type="text" name="last_name" />
+
+            <label for="zipcode">Zipcode:</label>
+            <input type="text" name="zipcode">
+
+            <label for="address1">Address:</label>
+            <textarea name="address1"></textarea>
+
+            <label for="card">Card:</label>
+            <input type="text" name="card">
+
+            <label for="address">Address 2:</label>
+            <textarea name="address2"></textarea>
+
+            <button id="pay_button">Pay</button>
+        </form>
+
+    </body>
+</html>

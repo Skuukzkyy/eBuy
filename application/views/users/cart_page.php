@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <meta name="description" content="E-commerce Capstone Project">
-        <meta name="author" content="Karen Marie E. Igcasan">
+        <meta name="author" content="Jerick Arlantico">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link href = "https://code.jquery.com/ui/1.10.4/themes/overcast/jquery-ui.css" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
