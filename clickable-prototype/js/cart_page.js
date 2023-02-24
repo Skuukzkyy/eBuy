@@ -31,6 +31,7 @@ $(document).ready(function() {
     // checkout forrm submit
     $(document).on('click', '#pay_button', function(){
         var total_cost = $('#total_cost').val();
+        alert("Stripe api prompt and and automatic email");
         $.post('/users/checkout', $('form#checkout').serialize(), function(res){
             if(res == 'success'){
                 pay(total_cost);
